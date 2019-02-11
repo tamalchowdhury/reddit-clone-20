@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 
 export default class Submit extends Component {
+  processPost = (event) => {
+    event.preventDefault();
+    let post = {};
+    post.title = event.target.title.value;
+    post.text = event.target.text.value;
+    if (post.title) {
+      let result = this.props.submitPost(post);
+      if (result) {
+        this.props.history.push('/');
+      }
+    }
+  };
+
   render() {
     return (
       <div>
         <h3>Submit a new post</h3>
-        <form className="submit-form" action="">
+        <form onSubmit={this.processPost} className="submit-form" action="">
           <div className="input-box">
             <label htmlFor="title">title</label>
             <input name="title" type="text" />

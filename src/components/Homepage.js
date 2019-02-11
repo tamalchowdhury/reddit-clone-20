@@ -6,9 +6,9 @@ export default class Homepage extends Component {
   render() {
     return (
       <div>
-        <Post />
-        <Post />
-        <Post />
+        {this.props.posts.map((item, index) => (
+          <Post key={index} post={item} rank={index + 1} />
+        ))}
         <div className="pagination">View more: next ></div>
       </div>
     );

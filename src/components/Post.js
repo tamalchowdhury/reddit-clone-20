@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 
 export default class Post extends Component {
   render() {
+    let { title, text } = this.props.post;
+
     return (
       <div className="post">
-        <div className="rank">1</div>
+        <div className="rank">{this.props.rank}</div>
         <div className="votes">
           <div className="arrow up" />
           <div className="score">207</div>
@@ -15,9 +17,7 @@ export default class Post extends Component {
         <div className="content">
           <div className="title-area">
             <span className="title">
-              <Link to="/post/sample-slug">
-                Are we supposed to like Miguel?
-              </Link>
+              <Link to={`/post/${this.props.rank}`}>{title}</Link>
             </span>
             <span className="url">(self.subreddit)</span>
           </div>

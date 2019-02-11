@@ -17,12 +17,30 @@ function Layout(props) {
 }
 
 export default class App extends Component {
+  state = {
+    posts: JSON.parse(localStorage.getItem('posts')) || []
+  };
+
+  submitPost = (post) => {
+    let posts = [...this.state.posts];
+    posts.push(post);
+    this.setState({ posts });
+    localStorage.setItem('posts', JSON.stringify(posts));
+    console.log('Saved!');
+    return true;
+  };
+
+  // componentDidMount() {
+  //   let posts = localStorage.getItem(posts) || [];
+  //   this.setState({ posts });
+  // }
+
   render() {
     return (
       <BrowserRouter>
         <Layout>
           <header id="header">
-            <nav class="top-menu">Home - Popular - All - Random</nav>
+            <nav className="top-menu">Home - Popular - All - Random</nav>
             <div className="main-header">
               <Link to="/" id="header-img" className="default-header">
                 reddit clone
@@ -34,8 +52,19 @@ export default class App extends Component {
           </header>
           <div id="container">
             <main id="body-submissions">
-              <Route exact path="/" component={Homepage} />
-              <Route path="/submit" component={Submit} />
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <Homepage posts={this.state.posts} {...props} />
+                )}
+              />
+              <Route
+                path="/submit"
+                render={(props) => (
+                  <Submit submitPost={this.submitPost} {...props} />
+                )}
+              />
               <Route path="/:post" component={Single} />
             </main>
             <aside id="sidebar">
