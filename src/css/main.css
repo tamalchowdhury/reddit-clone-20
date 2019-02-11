@@ -82,3 +82,87 @@ TODO Fix the top menu alignments etc
   grid-gap: 5px;
   margin-bottom: 10px;
 }
+
+/* Votes  */
+
+.votes {
+  text-align: center;
+  color: #cccccc;
+  line-height: 1.2rem;
+}
+
+.upvote,
+.votecount,
+.downvote {
+}
+
+.upvote,
+.downvote {
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.votecount {
+  font-size: 1.2rem;
+}
+
+.rank {
+  float: left;
+  margin-top: 15px;
+  color: #c6c6c6;
+  font-family: arial;
+  font-size: medium;
+  text-align: right;
+}
+
+.arrow {
+  margin: 2px 0px 0px 0px;
+  width: 100%;
+  height: 14px;
+  display: block;
+  cursor: pointer;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  outline: none;
+}
+
+.arrow.up {
+  background-image: url('../img/sprite.png');
+  background-position: 0px -1676px;
+  background-repeat: no-repeat;
+}
+
+.arrow.down {
+  background-image: url('../img/sprite.png');
+  background-position: -86px -1654px;
+  background-repeat: no-repeat;
+}
+
+.score {
+  text-align: center;
+  color: #c6c6c6;
+  font-weight: bold;
+  font-size: small;
+}
+
+.thumbnail {
+  float: left;
+  font-size: 0;
+  margin-bottom: 2px;
+  margin-right: 5px;
+  margin-top: 0;
+  margin-left: 0;
+  overflow: hidden;
+  width: 70px;
+}
+
+.thumbnail.self {
+  background-image: url('../img/sprite.png');
+  background-position: 0px -1267px;
+  background-repeat: no-repeat;
+  height: 50px;
+}

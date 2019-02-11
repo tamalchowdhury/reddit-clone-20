@@ -18,12 +18,18 @@ export default class App extends Component {
         <div id="container">
           <main id="body-submissions">
             <div className="post">
-              <div className="index">1</div>
-              <div className="votes">up/down</div>
-              <div className="media">Media</div>
+              <div className="rank">1</div>
+              <div className="votes">
+                <div className="arrow up" />
+                <div className="score">207</div>
+                <div className="arrow down" />
+              </div>
+              <a href="#" className="thumbnail self" />
               <div className="content">
                 <div className="title-area">
-                  <span className="title">Are we supposed to like Miguel?</span>
+                  <span className="title">
+                    <a href="">Are we supposed to like Miguel?</a>
+                  </span>
                   <span className="url">(self.subreddit)</span>
                 </div>
                 <div className="meta-area">
