@@ -221,3 +221,27 @@ TODO Fix the top menu alignments etc
 .link-area {
   margin-bottom: 5px;
 }
+
+/* Submit page  */
+
+.submit-form {
+  width: 500px;
+}
+
+.input-box {
+  width: 500px;
+  background-color: #cee3f8;
+  border-radius: 4px;
+  padding: 5px 10px 10px 10px;
+  font-size: large;
+  margin-bottom: 20px;
+}
+
+.submit-form label {
+  display: block;
+}
+
+.submit-form input,
+.submit-form textarea {
+  min-width: 100%;
+}

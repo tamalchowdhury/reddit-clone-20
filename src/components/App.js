@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import Homepage from './Homepage';
+import Submit from './Submit';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 function About() {
@@ -30,6 +31,7 @@ export default class App extends Component {
             <BrowserRouter>
               <Switch>
                 <Route exact path="/" component={Homepage} />
+                <Route path="/submit" component={Submit} />
                 <Route path="/:post" component={Single} />
               </Switch>
             </BrowserRouter>
@@ -39,6 +41,9 @@ export default class App extends Component {
               <input className="search" type="text" placeholder="Search" />
             </form>
             Sidebar for login/register area
+            <p>
+              <a href="/submit">Submit</a>
+            </p>
           </aside>
         </div>
         <footer id="footer">
