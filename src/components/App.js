@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import Post from './Post';
+import Homepage from './Homepage';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+
+function About() {
+  return <h1>About Component</h1>;
+}
+
+function Single() {
+  return <h1>Single Reddit Page</h1>;
+}
 
 export default class App extends Component {
   render() {
@@ -17,12 +27,12 @@ export default class App extends Component {
         </header>
         <div id="container">
           <main id="body-submissions">
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-
-            <div className="pagination">View more: next ></div>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={Homepage} />
+                <Route path="/:post" component={Single} />
+              </Switch>
+            </BrowserRouter>
           </main>
           <aside id="sidebar">
             <form action="">

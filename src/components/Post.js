@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Post extends Component {
   render() {
@@ -14,7 +15,9 @@ export default class Post extends Component {
         <div className="content">
           <div className="title-area">
             <span className="title">
-              <a href="">Are we supposed to like Miguel?</a>
+              <Link to="/post/sample-slug">
+                Are we supposed to like Miguel?
+              </Link>
             </span>
             <span className="url">(self.subreddit)</span>
           </div>
