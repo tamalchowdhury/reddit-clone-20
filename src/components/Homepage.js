@@ -6,7 +6,6 @@ export default class Homepage extends Component {
   render() {
     return (
       <div>
-        <Link to="/submit">Submit</Link>
         <Post />
         <Post />
         <Post />
