@@ -15,8 +15,35 @@ export default class App extends Component {
             <div className="user-header">tamalweb (2,214) Message logout</div>
           </div>
         </header>
-        <main id="body-submissions">All reddit posts will go here..</main>
-        <aside id="sidebar">Sidebar for login/register area</aside>
+        <div id="container">
+          <main id="body-submissions">
+            <div className="post">
+              <div className="index">1</div>
+              <div className="votes">up/down</div>
+              <div className="media">Media</div>
+              <div className="content">
+                <div className="title-area">
+                  <span className="title">Are we supposed to like Miguel?</span>
+                  <span className="url">(self.subreddit)</span>
+                </div>
+                <div className="meta-area">
+                  Submitted 8 hours ago by tamal to r/cobra
+                </div>
+                <div className="link-area">
+                  10 comments share save hide report
+                </div>
+              </div>
+            </div>
+
+            <div className="pagination">View more: next ></div>
+          </main>
+          <aside id="sidebar">
+            <form action="">
+              <input className="search" type="text" placeholder="Search" />
+            </form>
+            Sidebar for login/register area
+          </aside>
+        </div>
         <footer id="footer">
           <div className="fat-menu">Fat menu will go here..</div>
           <div className="copyright">Copyright info goes here..</div>

@@ -22,6 +22,7 @@ body {
   text-transform: uppercase;
 }
 /* Main header splits into 3 columns */
+/* TODO Make it responsive */
 .main-header {
   display: grid;
   grid-template-columns: 120px 1fr 300px;
@@ -46,3 +47,38 @@ TODO Fix the top menu alignments etc
 }
 
 /* ToDo Item */
+
+/* Container to hold posts and sidebar */
+/* TODO make this responsive */
+#container {
+  margin-top: 7px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+}
+
+#body-submissions {
+  border-top: 2px solid #dddddd;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+/* Sidebar */
+
+.search {
+  width: 100%;
+  border: 1px solid #666;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+}
+
+/* User post main meat of the app  */
+/* TODO Make this responsive */
+
+.post {
+  display: grid;
+  grid-template-columns: 20px 36px 70px 1fr;
+  grid-gap: 5px;
+  margin-bottom: 10px;
+}
