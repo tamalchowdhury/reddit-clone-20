@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 export default class Post extends Component {
   render() {
-    let { title, text } = this.props.post;
+    let { title, text, votes } = this.props.post;
 
     return (
       <div className="post">
         <div className="rank">{this.props.rank}</div>
         <div className="votes">
           <div className="arrow up" />
-          <div className="score">207</div>
+          <div className="score">{votes}</div>
           <div className="arrow down" />
         </div>
         <a href="#" className="thumbnail self" />

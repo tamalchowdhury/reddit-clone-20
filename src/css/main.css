@@ -245,3 +245,30 @@ TODO Fix the top menu alignments etc
 .submit-form textarea {
   min-width: 100%;
 }
+
+/* Sidebar  */
+
+.submit-button {
+  display: block;
+  text-align: center;
+  position: relative;
+  border: 1px solid #c4dbf1;
+  background: #ffffff none repeat-x scroll center left;
+  background-image: url('../img/sprite.png');
+  background-position: 0px -278px;
+  background-repeat: repeat;
+  font-size: 150%;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 29px;
+  height: 29px;
+}
+
+.submit-button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #369;
+}

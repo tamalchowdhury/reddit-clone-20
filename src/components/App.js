@@ -3,6 +3,7 @@ import Post from './Post';
 import Homepage from './Homepage';
 import Submit from './Submit';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import samplePosts from './_sample';
 
 function About() {
   return <h1>About Component</h1>;
@@ -18,7 +19,7 @@ function Layout(props) {
 
 export default class App extends Component {
   state = {
-    posts: JSON.parse(localStorage.getItem('posts')) || []
+    posts: JSON.parse(localStorage.getItem('posts')) || samplePosts
   };
 
   submitPost = (post) => {
@@ -29,11 +30,6 @@ export default class App extends Component {
     console.log('Saved!');
     return true;
   };
-
-  // componentDidMount() {
-  //   let posts = localStorage.getItem(posts) || [];
-  //   this.setState({ posts });
-  // }
 
   render() {
     return (
@@ -65,16 +61,16 @@ export default class App extends Component {
                   <Submit submitPost={this.submitPost} {...props} />
                 )}
               />
-              <Route path="/:post" component={Single} />
+              <Route path="/post/:id" component={Single} />
             </main>
             <aside id="sidebar">
               <form action="">
                 <input className="search" type="text" placeholder="Search" />
               </form>
               Sidebar for login/register area
-              <p>
+              <div className="submit-button">
                 <Link to="/submit">Submit</Link>
-              </p>
+              </div>
             </aside>
           </div>
           <footer id="footer">
