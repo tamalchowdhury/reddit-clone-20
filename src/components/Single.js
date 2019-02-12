@@ -7,7 +7,7 @@ export default class Single extends Component {
     if (!post) {
       return (
         <div>
-          <h1>Loading</h1>
+          <h3>Loading</h3>
         </div>
       );
     }
@@ -16,7 +16,7 @@ export default class Single extends Component {
 
     return (
       <div>
-        <h1>{title}</h1>
+        <h3>{title}</h3>
         {text ? <p>{text}</p> : ''}
       </div>
     );

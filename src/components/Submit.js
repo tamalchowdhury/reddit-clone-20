@@ -6,6 +6,7 @@ export default class Submit extends Component {
     let post = {};
     post.title = event.target.title.value;
     post.text = event.target.text.value;
+    post.created = Date.now();
     // TODO Change this
     post.author = 'tamal123';
     //
@@ -38,7 +39,7 @@ export default class Submit extends Component {
         <form onSubmit={this.processPost} className="submit-form" action="">
           <div className="input-box">
             <label htmlFor="title">title</label>
-            <input name="title" type="text" />
+            <input name="title" type="text" required />
           </div>
           <div className="input-box">
             <label htmlFor="text">text (optional)</label>
