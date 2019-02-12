@@ -21,6 +21,8 @@ export default class Submit extends Component {
         .then((res) => {
           if (res.success) {
             // Posted successfully!
+            this.props.submitPost(res.data);
+            console.log(res);
             this.props.history.push('/');
           }
         })

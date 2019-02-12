@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import Post from './Post';
 import Homepage from './Homepage';
 import Submit from './Submit';
+import Single from './Single';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import samplePosts from './_sample';
 
 function About() {
   return <h1>About Component</h1>;
-}
-
-function Single() {
-  return <h1>Single Reddit Page</h1>;
 }
 
 function Layout(props) {
@@ -19,7 +16,7 @@ function Layout(props) {
 
 export default class App extends Component {
   state = {
-    posts: JSON.parse(localStorage.getItem('posts')) || samplePosts
+    posts: []
   };
 
   submitPost = (post) => {
@@ -30,6 +27,22 @@ export default class App extends Component {
     console.log('Saved!');
     return true;
   };
+
+  componentDidMount() {
+    fetch('/api/posts/all')
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          let posts = res.data;
+          this.setState({ posts });
+        } else {
+          console.log('Cannot load the file');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -61,7 +74,6 @@ export default class App extends Component {
                   <Submit submitPost={this.submitPost} {...props} />
                 )}
               />
-              <Route path="/post/:id" component={Single} />
             </main>
             <aside id="sidebar">
               <form action="">
