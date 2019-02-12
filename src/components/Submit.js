@@ -10,7 +10,7 @@ export default class Submit extends Component {
     post.authorId = 'tamal123';
     //
     if (post.title) {
-      fetch('/api/post/new', {
+      fetch('/api/posts/new', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
