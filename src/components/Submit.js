@@ -6,11 +6,25 @@ export default class Submit extends Component {
     let post = {};
     post.title = event.target.title.value;
     post.text = event.target.text.value;
+    // TODO Change this
+    post.authorId = 'tamal123';
+    //
     if (post.title) {
-      let result = this.props.submitPost(post);
-      if (result) {
-        this.props.history.push('/');
-      }
+      fetch('/api/post/new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(post)
+      })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+      // let result = this.props.submitPost(post);
+      // if (result) {
+      //   this.props.history.push('/');
+      // }
     }
   };
 

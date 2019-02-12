@@ -10,7 +10,7 @@ export default class Post extends Component {
         <div className="rank">{this.props.rank}</div>
         <div className="votes">
           <div className="arrow up" />
-          <div className="score">{votes}</div>
+          <div className="score">{votes ? votes : '●'}</div>
           <div className="arrow down" />
         </div>
         <a href="#" className="thumbnail self" />
