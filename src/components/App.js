@@ -28,6 +28,12 @@ export default class App extends Component {
     return true;
   };
 
+  getTheSinglePost = (id) => {
+    let posts = [...this.state.posts];
+    let post = posts.filter((post) => post._id == id);
+    return post[0];
+  };
+
   componentDidMount() {
     fetch('/api/posts/all')
       .then((res) => res.json())
@@ -72,6 +78,13 @@ export default class App extends Component {
                 path="/submit"
                 render={(props) => (
                   <Submit submitPost={this.submitPost} {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/post/:id"
+                render={(props) => (
+                  <Single getTheSinglePost={this.getTheSinglePost} {...props} />
                 )}
               />
             </main>
