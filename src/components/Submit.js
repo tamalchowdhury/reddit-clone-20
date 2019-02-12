@@ -7,7 +7,7 @@ export default class Submit extends Component {
     post.title = event.target.title.value;
     post.text = event.target.text.value;
     // TODO Change this
-    post.authorId = 'tamal123';
+    post.author = 'tamal123';
     //
     if (post.title) {
       fetch('/api/posts/new', {
@@ -18,13 +18,15 @@ export default class Submit extends Component {
         body: JSON.stringify(post)
       })
         .then((res) => res.json())
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-
-      // let result = this.props.submitPost(post);
-      // if (result) {
-      //   this.props.history.push('/');
-      // }
+        .then((res) => {
+          if (res.success) {
+            // Posted successfully!
+            this.props.history.push('/');
+          }
+        })
+        .catch((err) => {
+          this.props.history.push('/?message=failed');
+        });
     }
   };
 
