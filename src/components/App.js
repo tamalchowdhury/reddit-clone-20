@@ -19,10 +19,7 @@ export default class App extends Component {
   state = {
     posts: [],
     loggedIn: false,
-    user: {},
-    username: '',
-    userId: '',
-    token: ''
+    user: {}
   };
 
   register = (user) => {
@@ -75,9 +72,7 @@ export default class App extends Component {
   logout = () => {
     this.setState({
       loggedIn: false,
-      username: undefined,
-      token: undefined,
-      userId: undefined
+      user: null
     });
   };
 
