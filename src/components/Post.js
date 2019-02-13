@@ -16,6 +16,30 @@ export default class Post extends Component {
         if (res.success) {
           // Upvoted successfully!
           console.log(res);
+          this.props.updateUser(res.user);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => {
+        // this.props.history.push('/?message=failed');
+        console.log(err);
+      });
+  };
+  downvote = (user, id) => {
+    fetch(`/api/post/${id}/downvote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          // Downvoted successfully!
+          console.log(res);
+          this.props.updateUser(res.user);
         } else {
           console.log(res);
         }
@@ -28,7 +52,8 @@ export default class Post extends Component {
 
   render() {
     let { title, text, votes, created, username, _id } = this.props.post;
-    let { upvotes } = this.props.user;
+
+    let { upvotes, downvotes } = this.props.user;
 
     return (
       <div className="post">
@@ -41,7 +66,12 @@ export default class Post extends Component {
             onClick={() => this.upvote(this.props.user, _id)}
           />
           <div className="score">{votes ? votes : '●'}</div>
-          <div className="arrow down" />
+          <div
+            className={`arrow down ${
+              downvotes && downvotes.includes(_id) ? 'downvoted' : ''
+            }`}
+            onClick={() => this.downvote(this.props.user, _id)}
+          />
         </div>
         <a href="#" className="thumbnail self" />
         <div className="content">

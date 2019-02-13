@@ -66,7 +66,7 @@ export default class App extends Component {
     this.setState({
       loggedIn: false,
       token: undefined,
-      user: null
+      user: {}
     });
   };
 
@@ -81,6 +81,11 @@ export default class App extends Component {
     let posts = [...this.state.posts];
     let post = posts.filter((post) => post._id == id);
     return post[0];
+  };
+
+  // Update user after up/downvote
+  updateUser = (user) => {
+    this.setState({ user });
   };
 
   componentDidMount() {
@@ -139,6 +144,7 @@ export default class App extends Component {
                   <Homepage
                     user={this.state.user}
                     posts={this.state.posts}
+                    updateUser={this.updateUser}
                     {...props}
                   />
                 )}
