@@ -3,6 +3,7 @@ import Post from './Post';
 import Homepage from './Homepage';
 import Submit from './Submit';
 import Single from './Single';
+import Register from './Register';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import samplePosts from './_sample';
 
@@ -62,7 +63,10 @@ export default class App extends Component {
               </Link>
               <div className="tab-menu" />
 
-              <div className="user-header">tamalweb (2,214) Message logout</div>
+              <div className="user-header">
+                What to join? <Link to="/login">Log in</Link> or{' '}
+                <Link to="/register">sign up</Link> in seconds.
+              </div>
             </div>
           </header>
           <div id="container">
@@ -87,12 +91,34 @@ export default class App extends Component {
                   <Single getTheSinglePost={this.getTheSinglePost} {...props} />
                 )}
               />
+              <Route path="/register" component={Register} />
             </main>
             <aside id="sidebar">
               <form action="">
                 <input className="search" type="text" placeholder="Search" />
               </form>
-              Sidebar for login/register area
+              <div className="login-box">
+                <form action="">
+                  <input
+                    className="login-username"
+                    type="text"
+                    name="username"
+                    placeholder="username"
+                  />
+                  <input
+                    className="login-password"
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                  />
+                  <div className="login-button-area">
+                    <a className="login-reset-link" href="/reset">
+                      reset password
+                    </a>
+                    <button>login</button>
+                  </div>
+                </form>
+              </div>
               <div className="submit-button">
                 <Link to="/submit">Submit</Link>
               </div>

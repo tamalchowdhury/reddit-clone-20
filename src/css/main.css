@@ -77,6 +77,10 @@ TODO Fix the top menu alignments etc
   border-top-left-radius: 7px;
 }
 
+.user-header a {
+  text-decoration: none;
+}
+
 /* ToDo Item */
 
 /* Container to hold posts and sidebar */
@@ -93,15 +97,6 @@ TODO Fix the top menu alignments etc
   border-top: 2px solid #dddddd;
   margin-right: 5px;
   padding: 5px;
-}
-
-/* Sidebar */
-
-.search {
-  width: 100%;
-  border: 1px solid #666;
-  font-size: 0.9rem;
-  padding: 5px 10px;
 }
 
 /* User post main meat of the app  */
@@ -248,6 +243,47 @@ TODO Fix the top menu alignments etc
 
 /* Sidebar  */
 
+.search {
+  width: 100%;
+  border: 1px solid #666;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+}
+
+.login-box {
+  padding: 7px;
+  border: 1px solid #666;
+  margin: 10px 0;
+}
+
+.login-box input {
+  display: inline;
+  width: 49%;
+  font-size: 0.9rem;
+  padding: 3px;
+}
+
+.login-username {
+  margin-right: 0;
+}
+
+.login-password {
+  float: right;
+}
+
+.login-button-area {
+  margin: 7px 0;
+  text-align: right;
+  font-size: small;
+}
+
+.login-reset-link {
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+/* Post submit button style from reddit */
+
 .submit-button {
   display: block;
   text-align: center;
@@ -271,4 +307,59 @@ TODO Fix the top menu alignments etc
   overflow: hidden;
   text-overflow: ellipsis;
   color: #369;
+}
+
+/* Registration page  */
+
+.reg-form {
+  width: 500px;
+  padding: 60px;
+  max-width: 100%;
+}
+
+.modal-title {
+  color: #4270a2;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.reg-form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 7px 10px;
+}
+
+.register-button-box {
+  margin-top: 40px;
+  text-align: right;
+}
+
+.button-primary {
+  background-color: #4f86b5;
+  border-bottom: 2px solid #4270a2;
+  color: #ffffff;
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 4px 12px 3px;
+  font-size: 12px;
+  line-height: 20px;
+  border-radius: 3px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
