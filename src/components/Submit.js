@@ -8,12 +8,14 @@ export default class Submit extends Component {
     post.text = event.target.text.value;
     post.created = Date.now();
     // TODO Change this
-    post.author = 'tamal123';
+    post.author = this.props.user.userId;
+    post.username = this.props.user.username;
     //
     if (post.title) {
       fetch('/api/posts/new', {
         method: 'POST',
         headers: {
+          Authorization: 'Bearer ' + this.props.user.token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(post)

@@ -19,15 +19,21 @@ export default class App extends Component {
   state = {
     posts: [],
     loggedIn: false,
+    user: {},
     username: '',
+    userId: '',
     token: ''
   };
 
   register = (user) => {
+    let userState = {
+      username: user.username,
+      token: user.token,
+      userId: user._id
+    };
     this.setState({
       loggedIn: true,
-      username: user.username,
-      token: user.token
+      user: userState
     });
   };
 
@@ -48,10 +54,14 @@ export default class App extends Component {
         .then((res) => {
           if (res.success) {
             // login successfully
+            let userState = {
+              username: user.username,
+              token: res.token,
+              userId: res.user._id
+            };
             this.setState({
               loggedIn: true,
-              username: user.username,
-              token: res.token
+              user: userState
             });
           }
         })
@@ -60,6 +70,15 @@ export default class App extends Component {
           console.log(err);
         });
     }
+  };
+
+  logout = () => {
+    this.setState({
+      loggedIn: false,
+      username: undefined,
+      token: undefined,
+      userId: undefined
+    });
   };
 
   submitPost = (post) => {
@@ -107,7 +126,14 @@ export default class App extends Component {
 
               <div className="user-header">
                 {this.state.loggedIn ? (
-                  <span>Hello {this.state.username} | logout</span>
+                  <span>
+                    Hello {this.state.user.username} |{' '}
+                    <a
+                      style={{ cursor: 'pointer', color: 'blue' }}
+                      onClick={this.logout}>
+                      logout
+                    </a>{' '}
+                  </span>
                 ) : (
                   <span>
                     What to join? <Link to="/login">Log in</Link> or{' '}
@@ -129,7 +155,11 @@ export default class App extends Component {
               <Route
                 path="/submit"
                 render={(props) => (
-                  <Submit submitPost={this.submitPost} {...props} />
+                  <Submit
+                    user={this.state.user}
+                    submitPost={this.submitPost}
+                    {...props}
+                  />
                 )}
               />
               <Route

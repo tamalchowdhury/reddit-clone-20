@@ -23,6 +23,7 @@ export default class Register extends Component {
           if (res.success) {
             // Registered successfully
             user.token = res.token;
+            user._id = res.user._id;
             this.props.register(user);
             this.props.history.push('/');
           }
