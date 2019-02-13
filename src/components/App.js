@@ -17,7 +17,37 @@ function Layout(props) {
 
 export default class App extends Component {
   state = {
-    posts: []
+    posts: [],
+    loggedIn: false,
+    username: '',
+    token: ''
+  };
+
+  register = (user) => {
+    // Register and then login the user
+    fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          // Registered successfully
+          this.setState({
+            loggedIn: true,
+            username: res.user.username,
+            token: 'Some Token' // TODO Add token
+          });
+          return true;
+        }
+      })
+      .catch((err) => {
+        // Catch the error
+        console.log(err);
+      });
   };
 
   submitPost = (post) => {
@@ -64,8 +94,14 @@ export default class App extends Component {
               <div className="tab-menu" />
 
               <div className="user-header">
-                What to join? <Link to="/login">Log in</Link> or{' '}
-                <Link to="/register">sign up</Link> in seconds.
+                {this.state.loggedIn ? (
+                  <span>Hello {this.state.username}</span>
+                ) : (
+                  <span>
+                    What to join? <Link to="/login">Log in</Link> or{' '}
+                    <Link to="/register">sign up</Link> in seconds.
+                  </span>
+                )}
               </div>
             </div>
           </header>
@@ -91,7 +127,12 @@ export default class App extends Component {
                   <Single getTheSinglePost={this.getTheSinglePost} {...props} />
                 )}
               />
-              <Route path="/register" component={Register} />
+              <Route
+                path="/register"
+                render={(props) => (
+                  <Register register={this.register} {...props} />
+                )}
+              />
             </main>
             <aside id="sidebar">
               <form action="">
