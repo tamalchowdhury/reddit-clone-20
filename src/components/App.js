@@ -24,30 +24,42 @@ export default class App extends Component {
   };
 
   register = (user) => {
-    // Register and then login the user
-    fetch('/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.success) {
-          // Registered successfully
-          this.setState({
-            loggedIn: true,
-            username: res.user.username,
-            token: 'Some Token' // TODO Add token
-          });
-          return true;
-        }
+    this.setState({
+      loggedIn: true,
+      username: user.username,
+      token: user.token
+    });
+  };
+
+  login = (event) => {
+    event.preventDefault();
+    let user = {};
+    user.username = event.target.username.value;
+    user.password = event.target.password.value;
+    if (user.username && user.password) {
+      fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
       })
-      .catch((err) => {
-        // Catch the error
-        console.log(err);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            // login successfully
+            this.setState({
+              loggedIn: true,
+              username: user.username,
+              token: res.token
+            });
+          }
+        })
+        .catch((err) => {
+          // Catch the error
+          console.log(err);
+        });
+    }
   };
 
   submitPost = (post) => {
@@ -95,7 +107,7 @@ export default class App extends Component {
 
               <div className="user-header">
                 {this.state.loggedIn ? (
-                  <span>Hello {this.state.username}</span>
+                  <span>Hello {this.state.username} | logout</span>
                 ) : (
                   <span>
                     What to join? <Link to="/login">Log in</Link> or{' '}
@@ -138,28 +150,33 @@ export default class App extends Component {
               <form action="">
                 <input className="search" type="text" placeholder="Search" />
               </form>
-              <div className="login-box">
-                <form action="">
-                  <input
-                    className="login-username"
-                    type="text"
-                    name="username"
-                    placeholder="username"
-                  />
-                  <input
-                    className="login-password"
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                  />
-                  <div className="login-button-area">
-                    <a className="login-reset-link" href="/reset">
-                      reset password
-                    </a>
-                    <button>login</button>
-                  </div>
-                </form>
-              </div>
+              {this.state.loggedIn ? (
+                ''
+              ) : (
+                <div className="login-box">
+                  <form onSubmit={this.login}>
+                    <input
+                      className="login-username"
+                      type="text"
+                      name="username"
+                      placeholder="username"
+                    />
+                    <input
+                      className="login-password"
+                      type="password"
+                      name="password"
+                      placeholder="password"
+                    />
+                    <div className="login-button-area">
+                      <a className="login-reset-link" href="/reset">
+                        reset password
+                      </a>
+                      <button>login</button>
+                    </div>
+                  </form>
+                </div>
+              )}
+
               <div className="submit-button">
                 <Link to="/submit">Submit</Link>
               </div>

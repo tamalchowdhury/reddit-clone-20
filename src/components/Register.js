@@ -11,6 +11,27 @@ export default class Register extends Component {
 
     // TODO Validate here
     if (user.username && user.password) {
+      fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            // Registered successfully
+            user.token = res.token;
+            this.props.register(user);
+            this.props.history.push('/');
+          }
+        })
+        .catch((err) => {
+          // Catch the error
+          console.log(err);
+        });
+
       this.props.register(user);
     } else {
       // Display an error
