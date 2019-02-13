@@ -168,6 +168,12 @@ TODO Fix the top menu alignments etc
   background-repeat: no-repeat;
 }
 
+.arrow.upvoted {
+  background-image: url('../img/sprite.png');
+  background-position: -21px -1676px;
+  background-repeat: no-repeat;
+}
+
 .score {
   text-align: center;
   color: #c6c6c6;

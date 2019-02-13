@@ -18,19 +18,16 @@ function Layout(props) {
 export default class App extends Component {
   state = {
     posts: [],
-    loggedIn: false,
-    user: {}
+    user: {},
+    token: '',
+    loggedIn: false
   };
 
   register = (user) => {
-    let userState = {
-      username: user.username,
-      token: user.token,
-      userId: user._id
-    };
     this.setState({
       loggedIn: true,
-      user: userState
+      token: user.token,
+      user
     });
   };
 
@@ -51,14 +48,10 @@ export default class App extends Component {
         .then((res) => {
           if (res.success) {
             // login successfully
-            let userState = {
-              username: user.username,
-              token: res.token,
-              userId: res.user._id
-            };
             this.setState({
               loggedIn: true,
-              user: userState
+              user: res.user,
+              token: res.token
             });
           }
         })
@@ -72,6 +65,7 @@ export default class App extends Component {
   logout = () => {
     this.setState({
       loggedIn: false,
+      token: undefined,
       user: null
     });
   };
@@ -81,8 +75,6 @@ export default class App extends Component {
     posts.push(post);
     this.setState({ posts });
     localStorage.setItem('posts', JSON.stringify(posts));
-    console.log('Saved!');
-    return true;
   };
 
   getTheSinglePost = (id) => {
@@ -144,7 +136,11 @@ export default class App extends Component {
                 exact
                 path="/"
                 render={(props) => (
-                  <Homepage posts={this.state.posts} {...props} />
+                  <Homepage
+                    user={this.state.user}
+                    posts={this.state.posts}
+                    {...props}
+                  />
                 )}
               />
               <Route
@@ -152,6 +148,7 @@ export default class App extends Component {
                 render={(props) => (
                   <Submit
                     user={this.state.user}
+                    token={this.state.token}
                     submitPost={this.submitPost}
                     {...props}
                   />
