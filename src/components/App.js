@@ -23,11 +23,11 @@ export default class App extends Component {
     loggedIn: false
   };
 
-  register = (user) => {
+  register = (res) => {
     this.setState({
       loggedIn: true,
-      token: user.token,
-      user
+      user: res.user,
+      token: res.token
     });
   };
 

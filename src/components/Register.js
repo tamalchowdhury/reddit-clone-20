@@ -22,8 +22,7 @@ export default class Register extends Component {
         .then((res) => {
           if (res.success) {
             // Registered successfully
-            user.token = res.token;
-            this.props.register(user);
+            this.props.register(res);
             this.props.history.push('/');
           }
         })
@@ -31,10 +30,9 @@ export default class Register extends Component {
           // Catch the error
           console.log(err);
         });
-
-      this.props.register(user);
     } else {
       // Display an error
+      console.log('Required fields are missing!');
     }
   };
   render() {
