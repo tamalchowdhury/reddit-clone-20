@@ -4,50 +4,85 @@ import moment from 'moment';
 
 export default class Post extends Component {
   upvote = (user, id) => {
-    fetch(`/api/post/${id}/upvote`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.success) {
-          // Upvoted successfully!
-          console.log(res);
-          this.props.updateUser(res);
-        } else {
-          console.log(res);
-        }
+    if (this.props.user._id) {
+      fetch(`/api/post/${id}/upvote`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
       })
-      .catch((err) => {
-        // this.props.history.push('/?message=failed');
-        console.log(err);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            // Upvoted successfully!
+            console.log(res);
+            this.props.updateUser(res);
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          // this.props.history.push('/?message=failed');
+          console.log(err);
+        });
+    } else {
+      console.log('You are not logged in!');
+    }
   };
   downvote = (user, id) => {
-    fetch(`/api/post/${id}/downvote`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.success) {
-          // Downvoted successfully!
-          console.log(res);
-          this.props.updateUser(res);
-        } else {
-          console.log(res);
-        }
+    if (this.props.user._id) {
+      fetch(`/api/post/${id}/downvote`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
       })
-      .catch((err) => {
-        // this.props.history.push('/?message=failed');
-        console.log(err);
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            // Downvoted successfully!
+            console.log(res);
+            this.props.updateUser(res);
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          // this.props.history.push('/?message=failed');
+          console.log(err);
+        });
+    } else {
+      console.log('You are not logged in!');
+    }
+  };
+
+  deletePost = (user, id) => {
+    if (this.props.user._id) {
+      fetch(`/api/post/${id}/delete`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            // Deleted successfully!
+            console.log(res);
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          // this.props.history.push('/?message=failed');
+          console.log(err);
+        });
+    } else {
+      console.log('You are not logged in!');
+    }
   };
 
   render() {
@@ -63,7 +98,8 @@ export default class Post extends Component {
     } = this.props.post;
 
     let { upvotes, downvotes } = this.props.user;
-    let score = 1 + upvotedby.length - downvotedby.length;
+    let score = upvotedby.length;
+    score = downvotedby.length ? score - downvotedby.length : score;
 
     return (
       <div className="post">
@@ -75,7 +111,7 @@ export default class Post extends Component {
             }`}
             onClick={() => this.upvote(this.props.user, _id)}
           />
-          <div className="score">{score ? score : '●'}</div>
+          <div className="score">{score ? score : 0}</div>
           <div
             className={`arrow down ${
               downvotes && downvotes.includes(_id) ? 'downvoted' : ''
@@ -87,14 +123,27 @@ export default class Post extends Component {
         <div className="content">
           <div className="title-area">
             <span className="title">
-              <Link to={`/post/${_id}`}>{title}</Link>
+              {this.props.single ? (
+                <span>{title}</span>
+              ) : (
+                <Link to={`/post/${_id}`}>{title}</Link>
+              )}
             </span>
             <span className="url">(self.subreddit)</span>
           </div>
           <div className="meta-area">
             Submitted {moment(created).fromNow()} by {username} to r/cobra
           </div>
-          <div className="link-area">10 comments share save hide report</div>
+          <div className="link-area">
+            10 comments{' '}
+            <span>
+              <a
+                onClick={() => this.deletePost(this.props.user, _id)}
+                className="fake-link">
+                delete
+              </a>
+            </span>
+          </div>
         </div>
       </div>
     );

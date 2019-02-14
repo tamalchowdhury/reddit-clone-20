@@ -86,8 +86,12 @@ export default class App extends Component {
   // Update user after up/downvote
   updateUser = (res) => {
     let posts = [...this.state.posts];
-    // posts.filter(post => post._id == res.post._id)
-    this.setState({ user: res.user });
+    posts.forEach((post, index) => {
+      if (post._id == res.post._id) {
+        posts[index] = res.post;
+      }
+    });
+    this.setState({ user: res.user, posts });
   };
 
   componentDidMount() {
@@ -166,7 +170,13 @@ export default class App extends Component {
                 exact
                 path="/post/:id"
                 render={(props) => (
-                  <Single getTheSinglePost={this.getTheSinglePost} {...props} />
+                  <Single
+                    user={this.state.user}
+                    updateUser={this.updateUser}
+                    posts={this.state.posts}
+                    getTheSinglePost={this.getTheSinglePost}
+                    {...props}
+                  />
                 )}
               />
               <Route

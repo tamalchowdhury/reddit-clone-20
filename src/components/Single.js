@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Post from './Post';
 
 export default class Single extends Component {
   render() {
@@ -16,8 +17,14 @@ export default class Single extends Component {
 
     return (
       <div>
-        <h3>{title}</h3>
-        {text ? <p>{text}</p> : ''}
+        <Post
+          key={1}
+          user={this.props.user}
+          updateUser={this.props.updateUser}
+          post={post}
+          rank={1}
+          single={true}
+        />
       </div>
     );
   }
