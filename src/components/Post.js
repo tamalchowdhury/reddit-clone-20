@@ -71,7 +71,7 @@ export default class Post extends Component {
         .then((res) => {
           if (res.success) {
             // Deleted successfully!
-            console.log(res);
+            this.props.deletePost(res);
           } else {
             console.log(res);
           }
@@ -94,6 +94,7 @@ export default class Post extends Component {
       username,
       upvotedby,
       downvotedby,
+      author,
       _id
     } = this.props.post;
 
@@ -136,13 +137,15 @@ export default class Post extends Component {
           </div>
           <div className="link-area">
             10 comments{' '}
-            <span>
+            {author == this.props.user._id || this.props.user.isAdmin ? (
               <a
                 onClick={() => this.deletePost(this.props.user, _id)}
                 className="fake-link">
                 delete
               </a>
-            </span>
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </div>

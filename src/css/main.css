@@ -12,6 +12,15 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.fake-link {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.fake-link:hover {
+  text-decoration: underline;
+}
+
 #header {
   background: #cee3f8;
   border-bottom: 1px solid #5f99cf;

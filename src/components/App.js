@@ -94,6 +94,17 @@ export default class App extends Component {
     this.setState({ user: res.user, posts });
   };
 
+  deletePost = (res) => {
+    let posts = [...this.state.posts];
+    posts.forEach((post, index) => {
+      if (post._id == res.deletedId) {
+        console.log('Found the post to be deleted!');
+        posts.splice(index, 1);
+      }
+    });
+    this.setState({ posts });
+  };
+
   componentDidMount() {
     fetch('/api/posts/all')
       .then((res) => res.json())
@@ -151,6 +162,7 @@ export default class App extends Component {
                     user={this.state.user}
                     posts={this.state.posts}
                     updateUser={this.updateUser}
+                    deletePost={this.deletePost}
                     {...props}
                   />
                 )}
@@ -173,6 +185,7 @@ export default class App extends Component {
                   <Single
                     user={this.state.user}
                     updateUser={this.updateUser}
+                    deletePost={this.deletePost}
                     posts={this.state.posts}
                     getTheSinglePost={this.getTheSinglePost}
                     {...props}

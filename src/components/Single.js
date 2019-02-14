@@ -21,6 +21,7 @@ export default class Single extends Component {
           key={1}
           user={this.props.user}
           updateUser={this.props.updateUser}
+          deletePost={this.props.deletePost}
           post={post}
           rank={1}
           single={true}

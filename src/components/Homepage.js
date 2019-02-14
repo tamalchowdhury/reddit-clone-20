@@ -11,6 +11,7 @@ export default class Homepage extends Component {
             key={index}
             user={this.props.user}
             updateUser={this.props.updateUser}
+            deletePost={this.props.deletePost}
             post={post}
             rank={index + 1}
           />
