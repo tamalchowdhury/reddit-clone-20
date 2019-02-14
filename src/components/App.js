@@ -84,8 +84,10 @@ export default class App extends Component {
   };
 
   // Update user after up/downvote
-  updateUser = (user) => {
-    this.setState({ user });
+  updateUser = (res) => {
+    let posts = [...this.state.posts];
+    // posts.filter(post => post._id == res.post._id)
+    this.setState({ user: res.user });
   };
 
   componentDidMount() {

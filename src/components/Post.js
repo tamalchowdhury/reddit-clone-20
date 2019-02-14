@@ -16,7 +16,7 @@ export default class Post extends Component {
         if (res.success) {
           // Upvoted successfully!
           console.log(res);
-          this.props.updateUser(res.user);
+          this.props.updateUser(res);
         } else {
           console.log(res);
         }
@@ -39,7 +39,7 @@ export default class Post extends Component {
         if (res.success) {
           // Downvoted successfully!
           console.log(res);
-          this.props.updateUser(res.user);
+          this.props.updateUser(res);
         } else {
           console.log(res);
         }
@@ -51,9 +51,19 @@ export default class Post extends Component {
   };
 
   render() {
-    let { title, text, votes, created, username, _id } = this.props.post;
+    let {
+      title,
+      text,
+      votes,
+      created,
+      username,
+      upvotedby,
+      downvotedby,
+      _id
+    } = this.props.post;
 
     let { upvotes, downvotes } = this.props.user;
+    let score = 1 + upvotedby.length - downvotedby.length;
 
     return (
       <div className="post">
@@ -65,7 +75,7 @@ export default class Post extends Component {
             }`}
             onClick={() => this.upvote(this.props.user, _id)}
           />
-          <div className="score">{votes ? votes : '●'}</div>
+          <div className="score">{score ? score : '●'}</div>
           <div
             className={`arrow down ${
               downvotes && downvotes.includes(_id) ? 'downvoted' : ''
