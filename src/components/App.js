@@ -4,7 +4,7 @@ import Homepage from './Homepage';
 import Submit from './Submit';
 import Single from './Single';
 import Register from './Register';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import samplePosts from './_sample';
 
 function About() {
@@ -70,10 +70,10 @@ export default class App extends Component {
     });
   };
 
-  submitPost = (post) => {
+  submitPost = (res) => {
     let posts = [...this.state.posts];
-    posts.push(post);
-    this.setState({ posts });
+    posts.push(res.post);
+    this.setState({ posts, user: res.user });
     localStorage.setItem('posts', JSON.stringify(posts));
   };
 
@@ -109,7 +109,17 @@ export default class App extends Component {
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
-          let posts = res.data;
+          let posts = res.data.sort((first, second) => {
+            let firstScore =
+              1 + first.upvotedby.length - first.downvotedby.length;
+            let secondScore =
+              1 + second.upvotedby.length - second.downvotedby.length;
+            if (firstScore > secondScore) {
+              return -1;
+            } else {
+              return 1;
+            }
+          });
           this.setState({ posts });
         } else {
           console.log('Cannot load the file');
@@ -169,14 +179,18 @@ export default class App extends Component {
               />
               <Route
                 path="/submit"
-                render={(props) => (
-                  <Submit
-                    user={this.state.user}
-                    token={this.state.token}
-                    submitPost={this.submitPost}
-                    {...props}
-                  />
-                )}
+                render={(props) =>
+                  this.state.loggedIn ? (
+                    <Submit
+                      user={this.state.user}
+                      token={this.state.token}
+                      submitPost={this.submitPost}
+                      {...props}
+                    />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
               />
               <Route
                 exact
@@ -230,10 +244,13 @@ export default class App extends Component {
                   </form>
                 </div>
               )}
-
-              <div className="submit-button">
-                <Link to="/submit">Submit</Link>
-              </div>
+              {this.state.loggedIn ? (
+                <div className="submit-button">
+                  <Link to="/submit">Submit</Link>
+                </div>
+              ) : (
+                ''
+              )}
             </aside>
           </div>
           <footer id="footer">
