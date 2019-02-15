@@ -20,6 +20,7 @@ export default class Single extends Component {
         <Post
           key={1}
           user={this.props.user}
+          token={this.props.token}
           updateUser={this.props.updateUser}
           deletePost={this.props.deletePost}
           post={post}

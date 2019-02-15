@@ -10,6 +10,7 @@ export default class Homepage extends Component {
           <Post
             key={index}
             user={this.props.user}
+            token={this.props.token}
             updateUser={this.props.updateUser}
             deletePost={this.props.deletePost}
             post={post}

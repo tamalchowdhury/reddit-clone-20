@@ -8,6 +8,7 @@ export default class Post extends Component {
       fetch(`/api/post/${id}/upvote`, {
         method: 'POST',
         headers: {
+          Authorization: 'Bearer ' + this.props.token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
@@ -16,10 +17,9 @@ export default class Post extends Component {
         .then((res) => {
           if (res.success) {
             // Upvoted successfully!
-            console.log(res);
             this.props.updateUser(res);
           } else {
-            console.log(res);
+            console.log(res.message);
           }
         })
         .catch((err) => {
@@ -35,6 +35,7 @@ export default class Post extends Component {
       fetch(`/api/post/${id}/downvote`, {
         method: 'POST',
         headers: {
+          Authorization: 'Bearer ' + this.props.token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
@@ -43,10 +44,9 @@ export default class Post extends Component {
         .then((res) => {
           if (res.success) {
             // Downvoted successfully!
-            console.log(res);
             this.props.updateUser(res);
           } else {
-            console.log(res);
+            console.log(res.message);
           }
         })
         .catch((err) => {
@@ -63,6 +63,7 @@ export default class Post extends Component {
       fetch(`/api/post/${id}/delete`, {
         method: 'DELETE',
         headers: {
+          Authorization: 'Bearer ' + this.props.token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
@@ -73,7 +74,7 @@ export default class Post extends Component {
             // Deleted successfully!
             this.props.deletePost(res);
           } else {
-            console.log(res);
+            console.log(res.message);
           }
         })
         .catch((err) => {

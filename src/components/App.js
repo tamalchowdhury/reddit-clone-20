@@ -98,7 +98,6 @@ export default class App extends Component {
     let posts = [...this.state.posts];
     posts.forEach((post, index) => {
       if (post._id == res.deletedId) {
-        console.log('Found the post to be deleted!');
         posts.splice(index, 1);
       }
     });
@@ -161,6 +160,7 @@ export default class App extends Component {
                   <Homepage
                     user={this.state.user}
                     posts={this.state.posts}
+                    token={this.state.token}
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
                     {...props}
@@ -184,6 +184,7 @@ export default class App extends Component {
                 render={(props) => (
                   <Single
                     user={this.state.user}
+                    token={this.state.token}
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
                     posts={this.state.posts}
