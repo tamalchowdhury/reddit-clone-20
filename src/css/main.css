@@ -265,6 +265,40 @@ TODO Fix the top menu alignments etc
   min-width: 100%;
 }
 
+.comments h3 {
+  font-weight: normal;
+  border-bottom: 1px dotted #000;
+}
+
+.comments button {
+  font-size: small;
+}
+
+.comment-form textarea {
+  display: block;
+  width: 500px;
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.single-comment {
+  margin: 7px;
+}
+
+.comment-author {
+  font-size: small;
+  font-weight: bold;
+  color: #666666;
+}
+
+.comment-body {
+  margin-bottom: 7px;
+}
+
+.comment-meta {
+  font-size: small;
+}
+
 /* Sidebar  */
 
 .search {

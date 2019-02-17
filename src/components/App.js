@@ -40,6 +40,10 @@ export default class App extends Component {
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
   };
 
+  tokenExpired = () => {
+    this.logout();
+  };
+
   login = (event) => {
     event.preventDefault();
     let user = {};
@@ -227,6 +231,7 @@ export default class App extends Component {
                     <Submit
                       user={this.state.user}
                       token={this.state.token}
+                      tokenExpired={this.tokenExpired}
                       submitPost={this.submitPost}
                       {...props}
                     />

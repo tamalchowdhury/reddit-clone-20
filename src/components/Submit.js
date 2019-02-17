@@ -32,8 +32,9 @@ export default class Submit extends Component {
             this.props.submitPost(res);
             this.props.history.push(`/post/${res.post._id}`);
           } else {
-            console.log(res);
-            this.setState({ submit: false });
+            if (res.tokenExpired) {
+              this.props.tokenExpired();
+            }
           }
         })
         .catch((err) => {
