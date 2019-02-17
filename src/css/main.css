@@ -12,6 +12,10 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.center {
+  text-align: center;
+}
+
 .fake-link {
   cursor: pointer;
   font-weight: bold;
@@ -281,6 +285,28 @@ TODO Fix the top menu alignments etc
   width: 49%;
   font-size: 0.9rem;
   padding: 3px;
+}
+
+.reg-error {
+  background: #f3efdf;
+  /* background: #faffbd; */
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #800000;
+}
+
+.login-error {
+  background: #f3efdf;
+  padding: 7px;
+  font-size: small;
+  margin-bottom: 7px;
+  color: #800000;
+}
+
+.close-button {
+  float: right;
+  color: #000;
+  cursor: pointer;
 }
 
 .login-username {

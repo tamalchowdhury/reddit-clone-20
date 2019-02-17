@@ -17,10 +17,13 @@ function Layout(props) {
 
 export default class App extends Component {
   state = {
+    loading: true,
     posts: [],
     user: {},
     token: '',
-    loggedIn: false
+    loggedIn: false,
+    loginError: false,
+    loginMsg: ''
   };
 
   register = (res) => {
@@ -65,12 +68,26 @@ export default class App extends Component {
               token: res.token
             };
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
+          } else {
+            this.setState({
+              loginError: true,
+              loginMsg: res.message
+            });
           }
         })
         .catch((err) => {
           // Catch the error
           console.log(err);
+          this.setState({
+            loginError: true,
+            loginMsg: err
+          });
         });
+    } else {
+      this.setState({
+        loginError: true,
+        loginMsg: 'Missing credentials'
+      });
     }
   };
 
@@ -143,13 +160,15 @@ export default class App extends Component {
               return 1;
             }
           });
-          this.setState({ posts });
+          this.setState({ posts, loading: false });
         } else {
           console.log('Cannot load the file');
+          this.setState({ loading: false });
         }
       })
       .catch((err) => {
         console.log(err);
+        this.setState({ loading: false });
       });
   }
 
@@ -177,7 +196,7 @@ export default class App extends Component {
                   </span>
                 ) : (
                   <span>
-                    What to join? <Link to="/login">Log in</Link> or{' '}
+                    Want to join? <a href="#login">Log in</a> or{' '}
                     <Link to="/register">sign up</Link> in seconds.
                   </span>
                 )}
@@ -191,6 +210,7 @@ export default class App extends Component {
                 path="/"
                 render={(props) => (
                   <Homepage
+                    loading={this.state.loading}
                     user={this.state.user}
                     posts={this.state.posts}
                     token={this.state.token}
@@ -232,9 +252,13 @@ export default class App extends Component {
               />
               <Route
                 path="/register"
-                render={(props) => (
-                  <Register register={this.register} {...props} />
-                )}
+                render={(props) =>
+                  this.state.loggedIn ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <Register register={this.register} {...props} />
+                  )
+                }
               />
             </main>
             <aside id="sidebar">
@@ -244,19 +268,35 @@ export default class App extends Component {
               {this.state.loggedIn ? (
                 ''
               ) : (
-                <div className="login-box">
+                <div className="login-box" id="login">
+                  {this.state.loginError ? (
+                    <div className="login-error">
+                      {this.state.loginMsg}
+                      <div
+                        className="close-button"
+                        onClick={() => {
+                          this.setState({ loginError: false });
+                        }}>
+                        &times;
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                   <form onSubmit={this.login}>
                     <input
                       className="login-username"
                       type="text"
                       name="username"
                       placeholder="username"
+                      required
                     />
                     <input
                       className="login-password"
                       type="password"
                       name="password"
                       placeholder="password"
+                      required
                     />
                     <div className="login-button-area">
                       <a className="login-reset-link" href="/reset">

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 
 export default class Submit extends Component {
+  state = {
+    submit: false
+  };
+
   processPost = (event) => {
+    this.setState({ submit: true });
     event.preventDefault();
     let post = {};
     post.title = event.target.title.value;
@@ -28,6 +33,7 @@ export default class Submit extends Component {
             this.props.history.push(`/post/${res.post._id}`);
           } else {
             console.log(res);
+            this.setState({ submit: false });
           }
         })
         .catch((err) => {
@@ -50,6 +56,13 @@ export default class Submit extends Component {
             <textarea name="text" id="" rows="6" />
           </div>
           <button>submit</button>
+          {this.state.submit ? (
+            <span>
+              <small> Submitting...</small>
+            </span>
+          ) : (
+            ''
+          )}
         </form>
       </div>
     );

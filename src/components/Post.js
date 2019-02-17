@@ -50,7 +50,6 @@ export default class Post extends Component {
           }
         })
         .catch((err) => {
-          // this.props.history.push('/?message=failed');
           console.log(err);
         });
     } else {
