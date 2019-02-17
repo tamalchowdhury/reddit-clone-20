@@ -22,8 +22,11 @@ export default class Register extends Component {
         .then((res) => {
           if (res.success) {
             // Registered successfully
+            console.log(res);
             this.props.register(res);
             this.props.history.push('/');
+          } else {
+            console.log(res);
           }
         })
         .catch((err) => {

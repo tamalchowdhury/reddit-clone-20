@@ -29,6 +29,12 @@ export default class App extends Component {
       user: res.user,
       token: res.token
     });
+    let userInfo = {
+      loggedIn: true,
+      user: res.user,
+      token: res.token
+    };
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
   };
 
   login = (event) => {
@@ -53,6 +59,12 @@ export default class App extends Component {
               user: res.user,
               token: res.token
             });
+            let userInfo = {
+              loggedIn: true,
+              user: res.user,
+              token: res.token
+            };
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
           }
         })
         .catch((err) => {
@@ -68,6 +80,7 @@ export default class App extends Component {
       token: undefined,
       user: {}
     });
+    localStorage.removeItem('userInfo');
   };
 
   submitPost = (res) => {
@@ -105,6 +118,16 @@ export default class App extends Component {
   };
 
   componentDidMount() {
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+    if (userInfo) {
+      this.setState({
+        loggedIn: true,
+        token: userInfo.token,
+        user: userInfo.user
+      });
+    }
+
     fetch('/api/posts/all')
       .then((res) => res.json())
       .then((res) => {
