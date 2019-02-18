@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import Comment from './Comment';
+import { runInThisContext } from 'vm';
 
 export default class Single extends Component {
   state = {
-    comments: []
+    comments: [],
+    submit: false
+  };
+
+  deleteComment = (id) => {
+    let comments = [...this.state.comments];
+    comments.forEach((comment, index) => {
+      if (comment._id == id) {
+        comments.splice(index, 1);
+      }
+    });
+    this.setState({ comments });
   };
 
   postComment = (event) => {
+    this.setState({ submit: true });
     event.preventDefault();
     let comment = event.target.comment.value;
     if (comment) {
@@ -36,14 +49,16 @@ export default class Single extends Component {
             // Do something with the post
             let comments = [...this.state.comments];
             comments.push(res.comment);
-            this.setState({ comments });
+            this.setState({ comments, submit: false });
             this.props.history.push(`#comment-id-${res.comment._id}`);
           } else {
             console.log(res);
+            this.setState({ submit: false });
           }
         })
         .catch((err) => {
           this.props.history.push('/?message=failed to post comment');
+          this.setState({ submit: false });
         });
     } else {
       console.log('Comment is empty');
@@ -95,16 +110,32 @@ export default class Single extends Component {
           single={true}
         />
         <div className="comments">
-          <h3>all 10 comments</h3>
-          <div className="comment-form">
-            <form onSubmit={this.postComment}>
-              <textarea name="comment" id="" rows="5" />
-              <button>Save</button>
-            </form>
-          </div>
+          {this.state.comments.length && this.state.comments.length > 1 ? (
+            <h3>all {this.state.comments.length} comments</h3>
+          ) : (
+            <h3>{this.state.comments.length} comment</h3>
+          )}
+
+          {this.props.user && this.props.user._id && !this.props.user.banned ? (
+            <div className="comment-form">
+              <form onSubmit={this.postComment}>
+                <textarea name="comment" id="" rows="5" required />
+                <button>Save</button>{' '}
+                {this.state.submit ? <span> posting..</span> : ''}
+              </form>
+            </div>
+          ) : (
+            ''
+          )}
           {/* Single comment component will go here.. */}
           {this.state.comments.map((comment) => (
-            <Comment comment={comment} key={comment._id} />
+            <Comment
+              token={this.props.token}
+              user={this.props.user}
+              comment={comment}
+              deleteComment={this.deleteComment}
+              key={comment._id}
+            />
           ))}
         </div>
       </div>

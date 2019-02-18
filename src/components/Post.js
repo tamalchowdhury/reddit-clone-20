@@ -133,7 +133,8 @@ export default class Post extends Component {
             <span className="url">(self.subreddit)</span>
           </div>
           <div className="meta-area">
-            Submitted {moment(created).fromNow()} by {username} to r/cobra
+            Submitted {moment(created).fromNow()} by{' '}
+            <Link to={`/user/${username}`}>{username}</Link> to r/cobra
           </div>
           <div className="link-area">
             10 comments{' '}
