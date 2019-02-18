@@ -113,7 +113,7 @@ export default class Single extends Component {
           {this.state.comments.length && this.state.comments.length > 1 ? (
             <h3>all {this.state.comments.length} comments</h3>
           ) : (
-            <h3>{this.state.comments.length} comment</h3>
+            <h3>{this.state.comments.length} comments</h3>
           )}
 
           {this.props.user && this.props.user._id && !this.props.user.banned ? (

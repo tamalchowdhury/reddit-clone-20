@@ -126,6 +126,14 @@ export default class App extends Component {
       }
     });
     this.setState({ user: res.user, posts });
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+    let updatedUserinfo = {
+      loggedIn: true,
+      user: res.user,
+      token: userInfo.token
+    };
+    localStorage.setItem('userInfo', JSON.stringify(updatedUserinfo));
   };
 
   deletePost = (res) => {

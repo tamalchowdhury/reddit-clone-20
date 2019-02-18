@@ -235,6 +235,12 @@ TODO Fix the top menu alignments etc
   color: #888888;
 }
 
+.meta-area a {
+  color: gray;
+  text-decoration: none;
+  border-bottom: 1px dotted gray;
+}
+
 .title-area,
 .meta-area,
 .link-area {
@@ -268,6 +274,12 @@ TODO Fix the top menu alignments etc
 .comments h3 {
   font-weight: normal;
   border-bottom: 1px dotted #000;
+}
+
+.comments a {
+  text-decoration: none;
+  color: gray;
+  border-bottom: 1px dotted gray;
 }
 
 .comments button {
