@@ -6,6 +6,7 @@ import Single from './Single';
 import Register from './Register';
 import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import samplePosts from './_sample';
+import UserPage from './UserPage';
 
 function About() {
   return <h1>About Component</h1>;
@@ -23,7 +24,7 @@ export default class App extends Component {
     token: '',
     loggedIn: false,
     loginError: false,
-    loginMsg: ''
+    loginMsg: 'Something went wrong'
   };
 
   register = (res) => {
@@ -199,10 +200,14 @@ export default class App extends Component {
               <div className="user-header">
                 {this.state.loggedIn ? (
                   <span>
-                    Hello {this.state.user.username} |{' '}
-                    <a
-                      style={{ cursor: 'pointer', color: 'blue' }}
-                      onClick={this.logout}>
+                    Hello{' '}
+                    <Link
+                      className="fake-link"
+                      to={`/user/${this.state.user.username}`}>
+                      {this.state.user.username}
+                    </Link>{' '}
+                    |{' '}
+                    <a className="fake-link" onClick={this.logout}>
                       logout
                     </a>{' '}
                   </span>
@@ -247,6 +252,20 @@ export default class App extends Component {
                     <Redirect to="/" />
                   )
                 }
+              />
+              <Route
+                exact
+                path="/user/:username"
+                render={(props) => (
+                  <UserPage
+                    user={this.state.user}
+                    posts={this.state.posts}
+                    token={this.state.token}
+                    updateUser={this.updateUser}
+                    deletePost={this.deletePost}
+                    {...props}
+                  />
+                )}
               />
               <Route
                 exact

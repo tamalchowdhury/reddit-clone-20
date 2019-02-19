@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
@@ -89,7 +89,6 @@ export default class Post extends Component {
     let {
       title,
       text,
-      votes,
       created,
       username,
       upvotedby,
@@ -103,53 +102,59 @@ export default class Post extends Component {
     score = downvotedby.length ? score - downvotedby.length : score;
 
     return (
-      <div className="post">
-        <div className="rank">{this.props.rank}</div>
-        <div className="votes">
-          <div
-            className={`arrow up ${
-              upvotes && upvotes.includes(_id) ? 'upvoted' : ''
-            }`}
-            onClick={() => this.upvote(this.props.user, _id)}
-          />
-          <div className="score">{score ? score : 0}</div>
-          <div
-            className={`arrow down ${
-              downvotes && downvotes.includes(_id) ? 'downvoted' : ''
-            }`}
-            onClick={() => this.downvote(this.props.user, _id)}
-          />
-        </div>
-        <a href="#" className="thumbnail self" />
-        <div className="content">
-          <div className="title-area">
-            <span className="title">
-              {this.props.single ? (
-                <span>{title}</span>
+      <Fragment>
+        <div className="post">
+          <div className="rank">{this.props.rank}</div>
+          <div className="votes">
+            <div
+              className={`arrow up ${
+                upvotes && upvotes.includes(_id) ? 'upvoted' : ''
+              }`}
+              onClick={() => this.upvote(this.props.user, _id)}
+            />
+            <div className="score">{score ? score : 0}</div>
+            <div
+              className={`arrow down ${
+                downvotes && downvotes.includes(_id) ? 'downvoted' : ''
+              }`}
+              onClick={() => this.downvote(this.props.user, _id)}
+            />
+          </div>
+          <a href="#" className="thumbnail self" />
+          <div className="content">
+            <div className="title-area">
+              <span className="title">
+                {this.props.single ? (
+                  <span>{title}</span>
+                ) : (
+                  <Link to={`/post/${_id}`}>{title}</Link>
+                )}
+              </span>
+              <span className="url">(self.subreddit)</span>
+            </div>
+            <div className="meta-area">
+              Submitted {moment(created).fromNow()} by{' '}
+              <Link to={`/user/${username}`}>{username}</Link>
+            </div>
+            <div className="link-area">
+              {author == this.props.user._id || this.props.user.isAdmin ? (
+                <a
+                  onClick={() => this.deletePost(this.props.user, _id)}
+                  className="fake-link">
+                  delete
+                </a>
               ) : (
-                <Link to={`/post/${_id}`}>{title}</Link>
+                ''
               )}
-            </span>
-            <span className="url">(self.subreddit)</span>
-          </div>
-          <div className="meta-area">
-            Submitted {moment(created).fromNow()} by{' '}
-            <Link to={`/user/${username}`}>{username}</Link> to r/cobra
-          </div>
-          <div className="link-area">
-            10 comments{' '}
-            {author == this.props.user._id || this.props.user.isAdmin ? (
-              <a
-                onClick={() => this.deletePost(this.props.user, _id)}
-                className="fake-link">
-                delete
-              </a>
-            ) : (
-              ''
-            )}
+            </div>
           </div>
         </div>
-      </div>
+        {this.props.single && text ? (
+          <div className="post-text">{text}</div>
+        ) : (
+          ''
+        )}
+      </Fragment>
     );
   }
 }

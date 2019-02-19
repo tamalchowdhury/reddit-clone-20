@@ -122,6 +122,12 @@ TODO Fix the top menu alignments etc
   margin-bottom: 10px;
 }
 
+.post-text {
+  border: 1px dashed gray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 /* Votes  */
 
 .votes {
