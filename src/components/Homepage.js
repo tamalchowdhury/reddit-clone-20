@@ -4,6 +4,9 @@ import Loading from '../img/loading.gif';
 import Post from './Post';
 
 export default class Homepage extends Component {
+  state = {
+    currentPage: 1
+  };
   render() {
     if (this.props.loading) {
       return (
@@ -26,7 +29,13 @@ export default class Homepage extends Component {
             rank={index + 1}
           />
         ))}
-        <div className="pagination">View more: next ></div>
+        <div className="pagination center">
+          <span
+            onClick={() => this.props.getNextPosts(1)}
+            className="load-more">
+            Load more
+          </span>
+        </div>
       </div>
     );
   }

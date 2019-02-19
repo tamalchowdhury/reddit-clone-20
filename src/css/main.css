@@ -115,6 +115,16 @@ TODO Fix the top menu alignments etc
 /* User post main meat of the app  */
 /* TODO Make this responsive */
 
+.load-more {
+  padding: 1px 4px;
+  background: #eee;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-weight: bold;
+  color: #369;
+  cursor: pointer;
+}
+
 .post {
   display: grid;
   grid-template-columns: 20px 36px 70px 1fr;
@@ -460,4 +470,38 @@ TODO Fix the top menu alignments etc
   -o-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+@media only screen and (max-width: 800px) {
+  #container {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto;
+  }
+
+  #body-submissions {
+    border: 0;
+  }
+
+  .thumbnail.self,
+  .rank {
+    display: none;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .post {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    grid-gap: 3px;
+    margin-bottom: 10px;
+  }
+
+  .post-text {
+    border: 1px dashed gray;
+    border-radius: 5px;
+    padding: 10px;
+  }
 }

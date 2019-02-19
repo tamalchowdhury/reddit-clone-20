@@ -27,6 +27,23 @@ export default class App extends Component {
     loginMsg: 'Something went wrong'
   };
 
+  getNextPosts = (skip) => {
+    let posts = [...this.state.posts];
+    fetch(`/api/posts/${skip}`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          res.posts.forEach((post) => {
+            posts.push(post);
+          });
+          this.setState({ posts });
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   register = (res) => {
     this.setState({
       loggedIn: true,
@@ -233,6 +250,7 @@ export default class App extends Component {
                     token={this.state.token}
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
+                    getNextPosts={this.getNextPosts}
                     {...props}
                   />
                 )}
@@ -348,9 +366,8 @@ export default class App extends Component {
               )}
             </aside>
           </div>
-          <footer id="footer">
-            <div className="fat-menu">Fat menu will go here..</div>
-            <div className="copyright">Copyright info goes here..</div>
+          <footer className="center" id="footer">
+            <div className="copyright">&copy;</div>
           </footer>
         </Layout>
       </BrowserRouter>
