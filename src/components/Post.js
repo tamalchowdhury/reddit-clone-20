@@ -120,7 +120,7 @@ export default class Post extends Component {
               onClick={() => this.downvote(this.props.user, _id)}
             />
           </div>
-          <a href="#" className="thumbnail self" />
+          <Link to={`/post/${_id}`} className="thumbnail self" />
           <div className="content">
             <div className="title-area">
               <span className="title">

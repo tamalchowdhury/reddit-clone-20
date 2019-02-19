@@ -115,6 +115,10 @@ TODO Fix the top menu alignments etc
 /* User post main meat of the app  */
 /* TODO Make this responsive */
 
+.pagination {
+  margin: 25px 0;
+}
+
 .load-more {
   padding: 1px 4px;
   background: #eee;

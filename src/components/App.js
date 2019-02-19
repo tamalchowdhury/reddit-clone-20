@@ -24,21 +24,25 @@ export default class App extends Component {
     token: '',
     loggedIn: false,
     loginError: false,
-    loginMsg: 'Something went wrong'
+    loginMsg: 'Something went wrong',
+    currentPage: 1,
+    loadMore: true
   };
 
   getNextPosts = (skip) => {
     let posts = [...this.state.posts];
-    fetch(`/api/posts/${skip}`)
+    fetch(`/api/posts/${skip}/${this.state.currentPage}`)
       .then((res) => res.json())
       .then((res) => {
-        if (res.success) {
+        if (res.posts.length) {
           res.posts.forEach((post) => {
             posts.push(post);
           });
-          this.setState({ posts });
-        } else {
+          this.setState({ posts, currentPage: this.state.currentPage + 1 });
           console.log(res);
+        } else {
+          console.log('End of the posts');
+          this.setState({ loadMore: false });
         }
       })
       .catch((err) => console.log(err));
@@ -251,6 +255,8 @@ export default class App extends Component {
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
                     getNextPosts={this.getNextPosts}
+                    currentPage={this.state.currentPage}
+                    loadMore={this.state.loadMore}
                     {...props}
                   />
                 )}
@@ -367,7 +373,7 @@ export default class App extends Component {
             </aside>
           </div>
           <footer className="center" id="footer">
-            <div className="copyright">&copy;</div>
+            <div className="copyright" />
           </footer>
         </Layout>
       </BrowserRouter>
