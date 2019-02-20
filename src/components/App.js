@@ -318,9 +318,13 @@ export default class App extends Component {
               />
             </main>
             <aside id="sidebar">
+              {/*
               <form action="">
                 <input className="search" type="text" placeholder="Search" />
               </form>
+              
+              */}
+
               {this.state.loggedIn ? (
                 ''
               ) : (

@@ -94,6 +94,18 @@ TODO Fix the top menu alignments etc
   text-decoration: none;
 }
 
+/* User Page  */
+.user-area {
+  padding: 0 25px;
+  border: 1px dashed gray;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.admin-actions {
+  padding-bottom: 25px;
+}
+
 /* ToDo Item */
 
 /* Container to hold posts and sidebar */
@@ -127,6 +139,14 @@ TODO Fix the top menu alignments etc
   font-weight: bold;
   color: #369;
   cursor: pointer;
+}
+
+.load-more.red {
+  color: darkred;
+}
+
+.load-more:disabled {
+  color: slategray;
 }
 
 .post {
@@ -410,6 +430,7 @@ TODO Fix the top menu alignments etc
   letter-spacing: -1px;
   line-height: 29px;
   height: 29px;
+  margin-top: 10px;
 }
 
 .submit-button a {
@@ -419,6 +440,7 @@ TODO Fix the top menu alignments etc
   overflow: hidden;
   text-overflow: ellipsis;
   color: #369;
+  text-decoration: none;
 }
 
 /* Registration page  */

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import Comment from './Comment';
-import { runInThisContext } from 'vm';
 
 export default class Single extends Component {
   state = {

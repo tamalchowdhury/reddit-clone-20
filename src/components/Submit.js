@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 export default class Submit extends Component {
   state = {
-    submit: false
+    submit: false,
+    submitMessage: 'Submitting...'
   };
 
   processPost = (event) => {
@@ -35,10 +36,18 @@ export default class Submit extends Component {
             if (res.tokenExpired) {
               this.props.tokenExpired();
             }
+            this.setState({
+              submit: true,
+              submitMessage: 'Something went wrong, please contact the admin'
+            });
           }
         })
         .catch((err) => {
-          this.props.history.push('/?message=failed');
+          this.setState({
+            submit: true,
+            submitMessage:
+              'The server encountered an error, please contact the admin'
+          });
         });
     }
   };
@@ -59,7 +68,7 @@ export default class Submit extends Component {
           <button>submit</button>
           {this.state.submit ? (
             <span>
-              <small> Submitting...</small>
+              <small> {this.state.submitMessage}</small>
             </span>
           ) : (
             ''

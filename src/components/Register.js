@@ -16,7 +16,7 @@ export default class Register extends Component {
   registerAccount = (event) => {
     event.preventDefault();
     let user = {};
-    user.username = event.target.username.value;
+    user.username = event.target.username.value.toLowerCase();
     user.password = event.target.password.value;
     user.passwordConfirm = event.target.passwordConfirm.value;
     user.email = event.target.email.value;
