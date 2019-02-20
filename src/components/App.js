@@ -29,9 +29,9 @@ export default class App extends Component {
     loadMore: true
   };
 
-  getNextPosts = (skip) => {
+  getNextPosts = () => {
     let posts = [...this.state.posts];
-    fetch(`/api/posts/${skip}/${this.state.currentPage}`)
+    fetch(`/api/posts/50/${this.state.currentPage}`)
       .then((res) => res.json())
       .then((res) => {
         if (res.posts.length) {

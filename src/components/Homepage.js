@@ -5,7 +5,7 @@ import Post from './Post';
 
 export default class Homepage extends Component {
   loadMorePosts = () => {
-    this.props.getNextPosts(5);
+    this.props.getNextPosts();
   };
 
   render() {
