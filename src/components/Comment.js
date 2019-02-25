@@ -17,10 +17,9 @@ export default class Comment extends Component {
         .then((res) => {
           if (res.success) {
             // Upvoted successfully!
-            console.log(res);
             this.props.updateComment(res.comment);
           } else {
-            console.log(res);
+            console.log(res.message);
           }
         })
         .catch((err) => {
@@ -31,26 +30,27 @@ export default class Comment extends Component {
       console.log('You are not logged in!');
     }
   };
-  downvote = (user, id) => {
+  downvote = () => {
     if (this.props.user._id) {
-      fetch(`/api/post/${id}/downvote`, {
-        method: 'POST',
+      fetch(`/api/comment/${this.props.comment._id}/downvote`, {
+        method: 'PUT',
         headers: {
           Authorization: 'Bearer ' + this.props.token,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(this.props.user)
       })
         .then((res) => res.json())
         .then((res) => {
           if (res.success) {
-            // Downvoted successfully!
-            this.props.updateUser(res);
+            // Upvoted successfully!
+            this.props.updateComment(res.comment);
           } else {
             console.log(res.message);
           }
         })
         .catch((err) => {
+          // this.props.history.push('/?message=failed');
           console.log(err);
         });
     } else {
@@ -108,7 +108,12 @@ export default class Comment extends Component {
             }`}
             onClick={this.upvote}
           />
-          <div className="arrow down" onClick={this.downvote} />
+          <div
+            className={`arrow down ${
+              user && downvotedby.includes(user._id) ? 'downvoted' : ''
+            }`}
+            onClick={this.downvote}
+          />
         </div>
         <div className="comment">
           <div className="comment-author">
