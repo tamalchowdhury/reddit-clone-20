@@ -133,12 +133,6 @@ export default class App extends Component {
     localStorage.setItem('posts', JSON.stringify(posts));
   };
 
-  getTheSinglePost = (id) => {
-    let posts = [...this.state.posts];
-    let post = posts.filter((post) => post._id == id);
-    return post[0];
-  };
-
   // Update user after up/downvote
   updateUser = (res) => {
     let posts = [...this.state.posts];
@@ -301,7 +295,6 @@ export default class App extends Component {
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
                     posts={this.state.posts}
-                    getTheSinglePost={this.getTheSinglePost}
                     {...props}
                   />
                 )}

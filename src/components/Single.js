@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import Comment from './Comment';
+import Loading from '../img/loading.gif';
 
 export default class Single extends Component {
   state = {
+    post: null,
     comments: [],
-    submit: false
+    submit: false,
+    notFound: false
   };
 
   deleteComment = (id) => {
@@ -77,32 +80,38 @@ export default class Single extends Component {
 
   componentDidMount() {
     let postId = this.props.match.params.id;
-    fetch(`/api/post/${postId}/comments/all`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(`/api/post/${postId}/single`)
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
-          // Posted successfully!
-          // Do something with the post
-          this.setState({ comments: res.comments });
+          // Res success
+          this.setState({ post: res.post, comments: res.comments });
         } else {
+          // Res failed
+          // Show not found error
           console.log(res);
+          this.setState({ notFound: true, post: {} });
         }
       })
-      .catch((err) => {});
+      .catch((err) => {
+        // Handle the error
+        console.log(err);
+      });
   }
 
   render() {
-    let post = this.props.getTheSinglePost(this.props.match.params.id);
+    if (!this.state.post) {
+      return (
+        <div className="center">
+          <img src={Loading} alt="Loading" />
+        </div>
+      );
+    }
 
-    if (!post) {
+    if (this.state.notFound) {
       return (
         <div>
-          <h3>Loading</h3>
+          <h1>Not Found</h1>
         </div>
       );
     }
@@ -115,7 +124,7 @@ export default class Single extends Component {
           token={this.props.token}
           updateUser={this.props.updateUser}
           deletePost={this.props.deletePost}
-          post={post}
+          post={this.state.post}
           rank={1}
           single={true}
         />
