@@ -40,6 +40,7 @@ export default class Single extends Component {
         author: this.props.user._id,
         username: this.props.user.username,
         post: postId,
+        upvotedby: this.props.user._id,
         created: Date.now()
       };
 
