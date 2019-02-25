@@ -98,8 +98,11 @@ export default class Post extends Component {
     } = this.props.post;
 
     let { upvotes, downvotes } = this.props.user;
-    let score = upvotedby.length;
-    score = downvotedby.length ? score - downvotedby.length : score;
+    let score = 0;
+    if (this.props.post) {
+      score = upvotedby.length;
+      score = downvotedby.length ? score - downvotedby.length : score;
+    }
 
     return (
       <Fragment>
