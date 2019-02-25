@@ -3,21 +3,25 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 export default class Post extends Component {
-  upvote = (user, id) => {
+  upvote = () => {
     if (this.props.user._id) {
-      fetch(`/api/post/${id}/upvote`, {
-        method: 'POST',
+      fetch(`/api/post/${this.props.post._id}/upvote`, {
+        method: 'PUT',
         headers: {
           Authorization: 'Bearer ' + this.props.token,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify({ userId: this.props.user._id })
       })
         .then((res) => res.json())
         .then((res) => {
           if (res.success) {
             // Upvoted successfully!
+
             this.props.updateUser(res);
+            if (this.props.single) {
+              this.props.updatePostAfterVotes(res.post);
+            }
           } else {
             console.log(res.message);
           }
@@ -30,26 +34,30 @@ export default class Post extends Component {
       console.log('You are not logged in!');
     }
   };
-  downvote = (user, id) => {
+  downvote = () => {
     if (this.props.user._id) {
-      fetch(`/api/post/${id}/downvote`, {
-        method: 'POST',
+      fetch(`/api/post/${this.props.post._id}/downvote`, {
+        method: 'PUT',
         headers: {
           Authorization: 'Bearer ' + this.props.token,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify({ userId: this.props.user._id })
       })
         .then((res) => res.json())
         .then((res) => {
           if (res.success) {
             // Downvoted successfully!
             this.props.updateUser(res);
+            if (this.props.single) {
+              this.props.updatePostAfterVotes(res.post);
+            }
           } else {
             console.log(res.message);
           }
         })
         .catch((err) => {
+          // this.props.history.push('/?message=failed');
           console.log(err);
         });
     } else {
@@ -111,14 +119,18 @@ export default class Post extends Component {
           <div className="votes">
             <div
               className={`arrow up ${
-                upvotes && upvotes.includes(_id) ? 'upvoted' : ''
+                this.props.user && upvotedby.includes(this.props.user._id)
+                  ? 'upvoted'
+                  : ''
               }`}
               onClick={() => this.upvote(this.props.user, _id)}
             />
             <div className="score">{score ? score : 0}</div>
             <div
               className={`arrow down ${
-                downvotes && downvotes.includes(_id) ? 'downvoted' : ''
+                this.props.user && downvotedby.includes(this.props.user._id)
+                  ? 'downvoted'
+                  : ''
               }`}
               onClick={() => this.downvote(this.props.user, _id)}
             />
