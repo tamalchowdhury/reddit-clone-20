@@ -20,6 +20,11 @@ export default class Single extends Component {
     });
     this.setState({ comments });
   };
+  // Applicable for single pages
+  updatePostAfterVotes = (post) => {
+    this.setState({ post });
+  };
+
   // Update a comment to state after up/downvote
   updateComment = (updatedComment) => {
     let comments = [...this.state.comments];
@@ -124,6 +129,7 @@ export default class Single extends Component {
           token={this.props.token}
           updateUser={this.props.updateUser}
           deletePost={this.props.deletePost}
+          updatePostAfterVotes={this.updatePostAfterVotes}
           post={this.state.post}
           rank={1}
           single={true}
