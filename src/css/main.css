@@ -335,6 +335,9 @@ TODO Fix the top menu alignments etc
 
 .single-comment {
   margin: 7px;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  grid-gap: 10px;
 }
 
 .comment-author {

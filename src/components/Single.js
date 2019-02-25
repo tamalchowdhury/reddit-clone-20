@@ -17,6 +17,16 @@ export default class Single extends Component {
     });
     this.setState({ comments });
   };
+  // Update a comment to state after up/downvote
+  updateComment = (updatedComment) => {
+    let comments = [...this.state.comments];
+    comments.forEach((comment, index) => {
+      if (comment._id === updatedComment._id) {
+        comments[index] = updatedComment;
+      }
+    });
+    this.setState({ comments });
+  };
 
   postComment = (event) => {
     this.setState({ submit: true });
@@ -134,6 +144,7 @@ export default class Single extends Component {
               comment={comment}
               deleteComment={this.deleteComment}
               key={comment._id}
+              updateComment={this.updateComment}
             />
           ))}
         </div>
