@@ -143,16 +143,6 @@ export default class App extends Component {
     });
 
     this.setState({ posts });
-
-    // this.setState({ user: res.user, posts });
-    // let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
-    // let updatedUserinfo = {
-    //   loggedIn: true,
-    //   user: res.user,
-    //   token: userInfo.token
-    // };
-    // localStorage.setItem('userInfo', JSON.stringify(updatedUserinfo));
   };
 
   deletePost = (res) => {
@@ -180,18 +170,7 @@ export default class App extends Component {
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
-          let posts = res.data.sort((first, second) => {
-            let firstScore =
-              1 + first.upvotedby.length - first.downvotedby.length;
-            let secondScore =
-              1 + second.upvotedby.length - second.downvotedby.length;
-            if (firstScore > secondScore) {
-              return -1;
-            } else {
-              return 1;
-            }
-          });
-          this.setState({ posts, loading: false });
+          this.setState({ posts: res.data, loading: false });
         } else {
           console.log('Cannot load the file');
           this.setState({ loading: false });

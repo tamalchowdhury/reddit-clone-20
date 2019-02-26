@@ -95,7 +95,8 @@ export default class Comment extends Component {
       created,
       _id,
       upvotedby,
-      downvotedby
+      downvotedby,
+      score
     } = this.props.comment;
     let { user } = this.props;
 
@@ -117,19 +118,20 @@ export default class Comment extends Component {
         </div>
         <div className="comment">
           <div className="comment-author">
-            <Link to={`/user/${username}`}>{username}</Link>{' '}
-            {moment(created).fromNow()}
+            <small>
+              <Link to={`/user/${username}`}>{username}</Link> {score} points,
+              posted {moment(created).fromNow()}{' '}
+              {author == this.props.user._id || this.props.user.isAdmin ? (
+                <span className="fake-link" onClick={this.deleteComment}>
+                  Delete
+                </span>
+              ) : (
+                ''
+              )}
+            </small>
           </div>
           <div className="comment-body">{comment}</div>
-          <div className="comment-meta">
-            {author == this.props.user._id || this.props.user.isAdmin ? (
-              <span className="fake-link" onClick={this.deleteComment}>
-                Delete
-              </span>
-            ) : (
-              ''
-            )}
-          </div>
+          <div className="comment-meta" />
         </div>
       </div>
     );
