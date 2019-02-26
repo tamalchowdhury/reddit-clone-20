@@ -106,13 +106,6 @@ export default class Post extends Component {
       _id
     } = this.props.post;
 
-    let { upvotes, downvotes } = this.props.user;
-    // let score = 0;
-    // if (this.props.post) {
-    //   score = upvotedby.length;
-    //   score = downvotedby.length ? score - downvotedby.length : score;
-    // }
-
     return (
       <Fragment>
         <div className="post">
