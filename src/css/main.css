@@ -329,7 +329,6 @@ TODO Fix the top menu alignments etc
 .comment-form textarea {
   display: block;
   width: 500px;
-  max-width: 100%;
   margin-bottom: 10px;
 }
 
@@ -508,6 +507,10 @@ TODO Fix the top menu alignments etc
     grid-template-columns: auto;
   }
 
+  #sidebar {
+    padding: 10px;
+  }
+
   #body-submissions {
     border: 0;
   }
@@ -532,5 +535,25 @@ TODO Fix the top menu alignments etc
     border: 1px dashed gray;
     border-radius: 5px;
     padding: 10px;
+  }
+
+  .comment-form textarea,
+  .submit-form,
+  .input-box,
+  .reg-form {
+    width: 100%;
+  }
+
+  .reg-form {
+    padding: 10px;
+  }
+
+  #header-img.default-header {
+    margin-bottom: 30px;
+  }
+
+  .user-header {
+    border-radius: 0;
+    width: 100%;
   }
 }
