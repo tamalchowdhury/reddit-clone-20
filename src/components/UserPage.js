@@ -15,7 +15,7 @@ export default class UserPage extends Component {
           Authorization: 'Bearer ' + this.props.token,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.props.user)
+        body: JSON.stringify({ userId: this.props.user._id })
       })
         .then((res) => res.json())
         .then((res) => {
@@ -23,12 +23,47 @@ export default class UserPage extends Component {
             // Action commited successfully
             this.setState({ currentUser: res.currentUser });
           } else {
-            console.log(res);
+            // Something went wrong
+            console.log('Something went wrong');
           }
         })
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      console.log('You are not logged in!');
+    }
+  };
+
+  deleteUser = () => {
+    if (this.props.user._id) {
+      if (
+        window.confirm(
+          'Are you sure you want to delete this user and all the posts created by them?'
+        )
+      ) {
+        fetch(`/api/user/${this.props.match.params.username}`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: 'Bearer ' + this.props.token,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId: this.props.user._id })
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.success) {
+              // Deleted successfully
+              this.props.history.push(`/`);
+              console.log(res);
+            } else {
+              console.log(res);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     } else {
       console.log('You are not logged in!');
     }
@@ -53,7 +88,9 @@ export default class UserPage extends Component {
       <div>
         <div className="user-area">
           <h2>{username}</h2>
-          {this.props.user.isAdmin && this.state.currentUser ? (
+          {this.props.user.isAdmin &&
+          this.state.currentUser &&
+          this.props.user._id !== this.state.currentUser._id ? (
             <div className="admin-actions">
               Admin actions:{' '}
               {banned ? (
@@ -82,7 +119,7 @@ export default class UserPage extends Component {
                   Make Admin
                 </button>
               )}{' '}
-              <button className="load-more red" disabled>
+              <button className="load-more red" onClick={this.deleteUser}>
                 Delete User
               </button>{' '}
             </div>

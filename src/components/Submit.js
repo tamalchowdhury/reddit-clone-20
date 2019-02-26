@@ -32,10 +32,9 @@ export default class Submit extends Component {
             // Posted successfully!
             this.props.submitPost(res);
             this.props.history.push(`/post/${res.post._id}`);
+          } else if (res.tokenExpired) {
+            this.props.tokenExpired();
           } else {
-            if (res.tokenExpired) {
-              this.props.tokenExpired();
-            }
             this.setState({
               submit: true,
               submitMessage: 'Something went wrong, please contact the admin'
