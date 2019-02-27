@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import Loading from '../img/loading.gif';
 import Post from './Post';
 
@@ -9,6 +8,7 @@ export default class Homepage extends Component {
   };
 
   render() {
+    document.title = 'Homepage';
     if (this.props.loading) {
       return (
         <div className="center">

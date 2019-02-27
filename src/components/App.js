@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import Post from './Post';
 import Homepage from './Homepage';
 import Submit from './Submit';
 import Single from './Single';
 import Register from './Register';
-import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
-import samplePosts from './_sample';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import UserPage from './UserPage';
-
-function About() {
-  return <h1>About Component</h1>;
-}
 
 function Layout(props) {
   return <div id="layout">{props.children}</div>;
@@ -137,7 +131,7 @@ export default class App extends Component {
   updateUser = (res) => {
     let posts = [...this.state.posts];
     posts.forEach((post, index) => {
-      if (post._id == res.post._id) {
+      if (post._id === res.post._id) {
         posts[index] = res.post;
       }
     });
@@ -148,7 +142,7 @@ export default class App extends Component {
   deletePost = (res) => {
     let posts = [...this.state.posts];
     posts.forEach((post, index) => {
-      if (post._id == res.deletedId) {
+      if (post._id === res.deletedId) {
         posts.splice(index, 1);
       }
     });
@@ -171,6 +165,9 @@ export default class App extends Component {
       .then((res) => {
         if (res.success) {
           this.setState({ posts: res.data, loading: false });
+          if (res.data.length < 50) {
+            this.setState({ loadMore: false });
+          }
         } else {
           console.log('Cannot load the file');
           this.setState({ loading: false });
@@ -187,7 +184,7 @@ export default class App extends Component {
       <BrowserRouter>
         <Layout>
           <header id="header">
-            <nav className="top-menu">Home - Popular - All - Random</nav>
+            <nav className="top-menu" />
             <div className="main-header">
               <Link to="/" id="header-img" className="default-header">
                 reddit clone

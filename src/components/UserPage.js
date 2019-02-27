@@ -69,6 +69,23 @@ export default class UserPage extends Component {
     }
   };
 
+  userPageUpdate = (updatedPost) => {
+    // Update the user posts
+    let posts = [...this.state.posts];
+    posts.forEach((post, index) => {
+      if (post._id === updatedPost._id) posts[index] = updatedPost;
+    });
+    this.setState({ posts });
+  };
+
+  userPageDelete = (deletedId) => {
+    let posts = [...this.state.posts];
+    posts.forEach((post, index) => {
+      if (post._id === deletedId) posts.splice(index, 1);
+    });
+    this.setState({ posts });
+  };
+
   componentDidMount() {
     fetch(`/api/user/${this.props.match.params.username}/posts`)
       .then((res) => res.json())
@@ -84,6 +101,7 @@ export default class UserPage extends Component {
   render() {
     let { username } = this.props.match.params;
     let { isAdmin, banned } = this.state.currentUser;
+    document.title = `User page: ${username}`;
     return (
       <div>
         <div className="user-area">
@@ -136,6 +154,8 @@ export default class UserPage extends Component {
             updateUser={this.props.updateUser}
             deletePost={this.props.deletePost}
             post={post}
+            userPageUpdate={this.userPageUpdate}
+            userPageDelete={this.userPageDelete}
             rank={index + 1}
           />
         ))}
