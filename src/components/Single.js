@@ -106,6 +106,7 @@ export default class Single extends Component {
 
   render() {
     if (!this.state.post) {
+      document.title = 'Loading..';
       return (
         <div className="center">
           <img src={Loading} alt="Loading" />
@@ -114,13 +115,14 @@ export default class Single extends Component {
     }
 
     if (this.state.notFound) {
+      document.title = 'Not Found';
       return (
         <div>
           <h1>Not Found</h1>
         </div>
       );
     }
-
+    document.title = `${this.state.post.title}`;
     return (
       <div>
         <Post

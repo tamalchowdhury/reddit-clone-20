@@ -84,6 +84,7 @@ export default class UserPage extends Component {
   render() {
     let { username } = this.props.match.params;
     let { isAdmin, banned } = this.state.currentUser;
+    document.title = `User page: ${username}`;
     return (
       <div>
         <div className="user-area">

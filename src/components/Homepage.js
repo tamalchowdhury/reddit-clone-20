@@ -9,6 +9,7 @@ export default class Homepage extends Component {
   };
 
   render() {
+    document.title = 'Homepage';
     if (this.props.loading) {
       return (
         <div className="center">
