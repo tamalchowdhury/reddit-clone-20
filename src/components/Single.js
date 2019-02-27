@@ -14,7 +14,7 @@ export default class Single extends Component {
   deleteComment = (id) => {
     let comments = [...this.state.comments];
     comments.forEach((comment, index) => {
-      if (comment._id == id) {
+      if (comment._id === id) {
         comments.splice(index, 1);
       }
     });

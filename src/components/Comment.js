@@ -121,7 +121,7 @@ export default class Comment extends Component {
             <small>
               <Link to={`/user/${username}`}>{username}</Link> {score} points,
               posted {moment(created).fromNow()}{' '}
-              {author == this.props.user._id || this.props.user.isAdmin ? (
+              {author === this.props.user._id || this.props.user.isAdmin ? (
                 <span className="fake-link" onClick={this.deleteComment}>
                   Delete
                 </span>

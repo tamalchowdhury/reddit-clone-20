@@ -22,6 +22,9 @@ export default class Post extends Component {
             if (this.props.single) {
               this.props.updatePostAfterVotes(res.post);
             }
+            if (this.props.userPageUpdate) {
+              this.props.userPageUpdate(res.post);
+            }
           } else {
             console.log(res.message);
           }
@@ -52,6 +55,9 @@ export default class Post extends Component {
             if (this.props.single) {
               this.props.updatePostAfterVotes(res.post);
             }
+            if (this.props.userPageUpdate) {
+              this.props.userPageUpdate(res.post);
+            }
           } else {
             console.log(res.message);
           }
@@ -80,6 +86,9 @@ export default class Post extends Component {
           if (res.success) {
             // Deleted successfully!
             this.props.deletePost(res);
+            if (this.props.userPageDelete) {
+              this.props.userPageDelete(id);
+            }
           } else {
             console.log(res.message);
           }
@@ -146,7 +155,7 @@ export default class Post extends Component {
               <Link to={`/user/${username}`}>{username}</Link>
             </div>
             <div className="link-area">
-              {author == this.props.user._id || this.props.user.isAdmin ? (
+              {author === this.props.user._id || this.props.user.isAdmin ? (
                 <a
                   onClick={() => this.deletePost(this.props.user, _id)}
                   className="fake-link">
