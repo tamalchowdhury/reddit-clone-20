@@ -5,6 +5,7 @@
 }
 
 html {
+  word-break: break-all;
 }
 
 body {

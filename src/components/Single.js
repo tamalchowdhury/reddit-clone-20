@@ -39,7 +39,7 @@ export default class Single extends Component {
   postComment = (event) => {
     this.setState({ submit: true });
     event.preventDefault();
-    let comment = event.target.comment.value;
+    let comment = event.target.comment.value.trim();
     if (comment) {
       event.target.reset();
       let postId = this.props.match.params.id;
@@ -70,7 +70,6 @@ export default class Single extends Component {
             this.setState({ comments, submit: false });
             this.props.history.push(`#comment-id-${res.comment._id}`);
           } else {
-            console.log(res);
             this.setState({ submit: false });
           }
         })
