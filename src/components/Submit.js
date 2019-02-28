@@ -15,7 +15,7 @@ export default class Submit extends Component {
     post.created = Date.now();
     post.author = this.props.user._id;
     post.username = this.props.user.username;
-    //
+
     if (post.title) {
       fetch('/api/posts/new', {
         method: 'POST',

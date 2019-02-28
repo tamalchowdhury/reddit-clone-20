@@ -5,7 +5,6 @@
   "dependencies": {
     "gh-pages": "^2.0.1",
     "moment": "^2.24.0",
-    "naughty-string-validator": "^1.1.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-router": "^4.3.1",
