@@ -10,10 +10,9 @@ export default class Submit extends Component {
     this.setState({ submit: true });
     event.preventDefault();
     let post = {};
-    post.title = event.target.title.value;
-    post.text = event.target.text.value;
+    post.title = event.target.title.value.trim();
+    post.text = event.target.text.value.trim();
     post.created = Date.now();
-    // TODO Change this
     post.author = this.props.user._id;
     post.username = this.props.user.username;
     //
@@ -39,6 +38,7 @@ export default class Submit extends Component {
               submit: true,
               submitMessage: 'Something went wrong, please contact the admin'
             });
+            console.log(res.message);
           }
         })
         .catch((err) => {
@@ -48,6 +48,12 @@ export default class Submit extends Component {
               'The server encountered an error, please contact the admin'
           });
         });
+      event.target.reset();
+    } else {
+      this.setState({
+        submit: true,
+        submitMessage: 'Missing required information'
+      });
     }
   };
 

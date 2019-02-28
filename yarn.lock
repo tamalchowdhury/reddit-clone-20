@@ -5577,6 +5577,10 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
+naughty-string-validator@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/naughty-string-validator/-/naughty-string-validator-1.1.0.tgz#1dd11100d8db2a6567298345fa65c0c5a53ee198"
+
 needle@^2.2.1:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.2.4.tgz#51931bff82533b1928b7d1d69e01f1b00ffd2a4e"
