@@ -3,6 +3,7 @@ import Homepage from './Homepage';
 import Submit from './Submit';
 import Single from './Single';
 import Register from './Register';
+import Admin from './Admin';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import UserPage from './UserPage';
 
@@ -192,6 +193,14 @@ export default class App extends Component {
               <div className="tab-menu" />
 
               <div className="user-header">
+                {this.state.loggedIn && this.state.user.isAdmin ? (
+                  <span>
+                    {' '}
+                    <Link to="/admin">Admin Settings</Link> |{' '}
+                  </span>
+                ) : (
+                  ''
+                )}
                 {this.state.loggedIn ? (
                   <span>
                     Hello{' '}
@@ -248,6 +257,16 @@ export default class App extends Component {
                       submitPost={this.submitPost}
                       {...props}
                     />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                path="/admin"
+                render={(props) =>
+                  this.state.loggedIn && this.state.user.isAdmin ? (
+                    <Admin {...props} />
                   ) : (
                     <Redirect to="/" />
                   )

@@ -518,6 +518,15 @@ TODO Fix the top menu alignments etc
   max-width: 100%;
 }
 
+.banner-form {
+  width: 500px;
+  max-width: 100%;
+}
+
+.sidebar-ad {
+  margin-top: 10px;
+}
+
 @media only screen and (max-width: 800px) {
   #container {
     margin: 0;
