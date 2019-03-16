@@ -207,8 +207,8 @@ export default class App extends Component {
                   </span>
                 ) : (
                   <span>
-                    Want to join? <a href="#login">Log in</a> or{' '}
-                    <Link to="/register">sign up</Link> in seconds.
+                    Want to join? <Link to="/register">sign up</Link> in
+                    seconds.
                   </span>
                 )}
               </div>
@@ -216,6 +216,9 @@ export default class App extends Component {
           </header>
           <div id="container">
             <main id="body-submissions">
+              <div className="banner top-banner padding">
+                <img src="https://via.placeholder.com/728x90" alt="" />
+              </div>
               <Route
                 exact
                 path="/"
@@ -346,9 +349,30 @@ export default class App extends Component {
               ) : (
                 ''
               )}
+              <div className="sidebar-ad">
+                <div className="banner sidebar-banner">
+                  <img src="https://via.placeholder.com/300x250" alt="" />
+                </div>
+              </div>
+              <div className="rules-section">
+                <h3>Rules</h3>
+                <ul>
+                  <li>Read the official Getting Started page on the docs</li>
+                  <li>Read the official Getting Started page on the docs</li>
+                  <li>Read the official Getting Started page on the docs</li>
+                  <li>Read the official Getting Started page on the docs</li>
+                  <li>Read the official Getting Started page on the docs</li>
+                  <li>Read the official Getting Started page on the docs</li>
+                  <li>Read the official Getting Started page on the docs</li>
+                </ul>
+              </div>
+              <div className="html-section">Arbritrary html will go here..</div>
             </aside>
           </div>
           <footer className="center" id="footer">
+            <div className="banner footer-banner padding">
+              <img src="https://via.placeholder.com/728x90" alt="" />
+            </div>
             <div className="copyright" />
           </footer>
         </Layout>
