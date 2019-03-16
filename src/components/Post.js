@@ -147,8 +147,8 @@ export default class Post extends Component {
                 ) : (
                   <Link to={`/post/${_id}`}>{title}</Link>
                 )}
-              </span>
-              <span className="url">(self.subreddit)</span>
+              </span>{' '}
+              <span className="url">(self.{document.domain})</span>
             </div>
             <div className="meta-area">
               Submitted {moment(created).fromNow()} by{' '}
