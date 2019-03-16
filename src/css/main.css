@@ -27,8 +27,8 @@ body {
 }
 
 #header {
-  background: #cee3f8;
-  border-bottom: 1px solid #5f99cf;
+  background: #5d198e;
+  border-bottom: 1px solid #c9b2d9;
 }
 
 .top-menu {
@@ -42,7 +42,7 @@ body {
 /* TODO Make it responsive */
 .main-header {
   display: grid;
-  grid-template-columns: 120px 1fr 300px;
+  grid-template-columns: 150px 1fr 300px;
 }
 
 .logo img {
@@ -59,11 +59,12 @@ TODO Fix the top menu alignments etc
 
 #header-img.default-header {
   text-indent: -9999px;
-  background-image: url('../img/sprite.png');
-  background-position: 0px -1323px;
+  background-image: url('../img/sportsnerd-logo.png');
+  /* background-position: 0px -1323px; */
   background-repeat: no-repeat;
-  height: 40px;
-  width: 120px;
+  background-size: contain;
+  height: 60px;
+  width: 100%;
   display: inline-block;
   vertical-align: bottom;
   margin-bottom: 3px;
@@ -85,7 +86,7 @@ TODO Fix the top menu alignments etc
   position: absolute;
   right: 0px;
   bottom: 0px;
-  background-color: #eff7ff;
+  background-color: #ede5f2;
   padding: 4px;
   line-height: 12px;
   border-top-left-radius: 7px;
