@@ -183,7 +183,13 @@ export default class App extends Component {
     fetch('/api/app/content')
       .then((res) => res.json())
       .then((json) => {
-        this.setState({ codes: json });
+        console.log(json);
+        if (json.success) {
+          console.log(json);
+          this.setState({ codes: json.codes });
+        } else {
+          console.log(json);
+        }
       })
       .catch((err) => console.log(err));
   }
@@ -309,6 +315,7 @@ export default class App extends Component {
                   <Single
                     user={this.state.user}
                     token={this.state.token}
+                    banner={this.state.codes.commentBanner}
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
                     posts={this.state.posts}
@@ -389,7 +396,7 @@ export default class App extends Component {
                   <div className="banner sidebar-banner">
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: this.state.sidebarBanner
+                        __html: this.state.codes.sidebarBanner
                       }}
                     />
                   </div>
@@ -401,7 +408,7 @@ export default class App extends Component {
                 <div className="rules-section">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: this.state.rulesCode
+                      __html: this.state.codes.rulesCode
                     }}
                   />
                 </div>
@@ -412,7 +419,7 @@ export default class App extends Component {
                 <div className="html-section">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: this.state.extraCode
+                      __html: this.state.codes.extraCode
                     }}
                   />
                 </div>

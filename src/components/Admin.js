@@ -27,14 +27,7 @@ export default class Admin extends Component {
   };
 
   render() {
-    let {
-      topBanner,
-      footerBanner,
-      commentBanner,
-      sidebarBanner,
-      rulesCode,
-      extraCode
-    } = this.props.codes;
+    let { codes } = this.props;
     return (
       <div>
         <h2>Admin Page</h2>
@@ -44,7 +37,7 @@ export default class Admin extends Component {
             name="topBanner"
             className="banner-form"
             rows="5"
-            defaultValue={topBanner}
+            defaultValue={codes ? codes.topBanner : null}
           />
           <hr />
           <h3>Before Comments Banner Code</h3>
@@ -52,7 +45,7 @@ export default class Admin extends Component {
             name="commentBanner"
             className="banner-form"
             rows="5"
-            defaultValue={commentBanner}
+            defaultValue={codes ? codes.commentBanner : null}
           />
           <hr />
           <h2>Sidebar Area</h2>
@@ -61,7 +54,7 @@ export default class Admin extends Component {
             name="sidebarBanner"
             className="banner-form"
             rows="5"
-            defaultValue={sidebarBanner}
+            defaultValue={codes ? codes.sidebarBanner : null}
           />
           <hr />
           <h3>Rules Section HTML 1</h3>
@@ -69,7 +62,7 @@ export default class Admin extends Component {
             name="rulesCode"
             className="banner-form"
             rows="10"
-            defaultValue={rulesCode}
+            defaultValue={codes ? codes.rulesCode : null}
           />
           <hr />
           <h3>Extra Code HTML 2</h3>
@@ -77,7 +70,7 @@ export default class Admin extends Component {
             name="extraCode"
             className="banner-form"
             rows="10"
-            defaultValue={extraCode}
+            defaultValue={codes ? codes.extraCode : null}
           />
           <hr />
           <h2>Footer Section</h2>
@@ -86,7 +79,7 @@ export default class Admin extends Component {
             name="footerBanner"
             className="banner-form"
             rows="5"
-            defaultValue={footerBanner}
+            defaultValue={codes ? codes.footerBanner : null}
           />
           <hr />
           <strong>Save all changes</strong>
