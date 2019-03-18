@@ -316,7 +316,9 @@ export default class App extends Component {
                   <Single
                     user={this.state.user}
                     token={this.state.token}
-                    banner={this.state.codes.commentBanner}
+                    banner={
+                      this.state.codes ? this.state.codes.commentBanner : null
+                    }
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
                     posts={this.state.posts}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Markdown from 'react-markdown';
 
 export default class Comment extends Component {
   upvote = () => {
@@ -130,7 +131,9 @@ export default class Comment extends Component {
               )}
             </small>
           </div>
-          <div className="comment-body">{comment}</div>
+          <div className="comment-body">
+            <Markdown linkTarget="_blank" source={comment} />
+          </div>
           <div className="comment-meta" />
         </div>
       </div>

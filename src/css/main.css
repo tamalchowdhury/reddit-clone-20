@@ -320,6 +320,10 @@ TODO Fix the top menu alignments etc
 
 .comments a {
   text-decoration: none;
+}
+
+.comment-author a {
+  text-decoration: none;
   color: gray;
   border-bottom: 1px dotted gray;
 }
