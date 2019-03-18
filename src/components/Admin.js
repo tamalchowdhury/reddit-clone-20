@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 export default class Admin extends Component {
+  state = {
+    loading: ''
+  };
+
   saveSettings = (event) => {
     event.preventDefault();
     let updates = {};
@@ -11,6 +15,7 @@ export default class Admin extends Component {
     updates.rulesCode = event.target.rulesCode.value;
     updates.extraCode = event.target.extraCode.value;
 
+    this.setState({ loading: 'Saving...' });
     fetch(`/api/app/update`, {
       method: 'PUT',
       headers: {
@@ -22,8 +27,14 @@ export default class Admin extends Component {
       body: JSON.stringify(updates)
     })
       .then((res) => res.json())
-      .then((json) => console.log(json))
-      .catch((err) => console.log(err));
+      .then((json) => {
+        if (json.success) {
+          this.setState({ loading: undefined });
+        }
+      })
+      .catch((err) => {
+        this.setState({ loading: 'Failed to save!' });
+      });
   };
 
   render() {
@@ -84,7 +95,7 @@ export default class Admin extends Component {
           <hr />
           <strong>Save all changes</strong>
           <br />
-          <button>Save</button>
+          <button>Save</button> {this.state.loading}
         </form>
       </div>
     );

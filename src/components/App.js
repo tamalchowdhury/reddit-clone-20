@@ -183,13 +183,10 @@ export default class App extends Component {
     fetch('/api/app/content')
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         if (json.success) {
-          console.log(json);
           this.setState({ codes: json.codes });
-        } else {
-          console.log(json);
         }
+        // See if you can do anything with errors
       })
       .catch((err) => console.log(err));
   }
@@ -288,7 +285,11 @@ export default class App extends Component {
                 path="/admin"
                 render={(props) =>
                   this.state.loggedIn && this.state.user.isAdmin ? (
-                    <Admin {...props} codes={this.state.codes} />
+                    <Admin
+                      {...props}
+                      token={this.state.token}
+                      codes={this.state.codes}
+                    />
                   ) : (
                     <Redirect to="/" />
                   )
