@@ -21,7 +21,8 @@ export default class App extends Component {
     loginError: false,
     loginMsg: 'Something went wrong',
     currentPage: 1,
-    loadMore: true
+    loadMore: true,
+    topBanner: undefined
   };
 
   getNextPosts = () => {
@@ -178,6 +179,13 @@ export default class App extends Component {
         console.log(err);
         this.setState({ loading: false });
       });
+
+    fetch('/api/app/content')
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({ topBanner: json.topBanner });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -225,9 +233,15 @@ export default class App extends Component {
           </header>
           <div id="container">
             <main id="body-submissions">
-              <div className="banner top-banner padding">
-                <img src="https://via.placeholder.com/728x90" alt="" />
-              </div>
+              {this.state.topBanner ? (
+                <div className="banner top-banner padding">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: this.state.topBanner }}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
               <Route
                 exact
                 path="/"
