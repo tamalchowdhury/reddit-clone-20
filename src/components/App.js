@@ -22,7 +22,7 @@ export default class App extends Component {
     loginMsg: 'Something went wrong',
     currentPage: 1,
     loadMore: true,
-    topBanner: undefined
+    codes: null
   };
 
   getNextPosts = () => {
@@ -183,7 +183,7 @@ export default class App extends Component {
     fetch('/api/app/content')
       .then((res) => res.json())
       .then((json) => {
-        this.setState({ topBanner: json.topBanner });
+        this.setState({ codes: json });
       })
       .catch((err) => console.log(err));
   }
@@ -233,10 +233,12 @@ export default class App extends Component {
           </header>
           <div id="container">
             <main id="body-submissions">
-              {this.state.topBanner ? (
+              {this.state.codes ? (
                 <div className="banner top-banner padding">
                   <div
-                    dangerouslySetInnerHTML={{ __html: this.state.topBanner }}
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.codes.topBanner
+                    }}
                   />
                 </div>
               ) : (
@@ -280,7 +282,7 @@ export default class App extends Component {
                 path="/admin"
                 render={(props) =>
                   this.state.loggedIn && this.state.user.isAdmin ? (
-                    <Admin {...props} />
+                    <Admin {...props} codes={this.state.codes} />
                   ) : (
                     <Redirect to="/" />
                   )
@@ -382,30 +384,55 @@ export default class App extends Component {
               ) : (
                 ''
               )}
-              <div className="sidebar-ad">
-                <div className="banner sidebar-banner">
-                  <img src="https://via.placeholder.com/300x250" alt="" />
+              {this.state.codes ? (
+                <div className="sidebar-ad">
+                  <div className="banner sidebar-banner">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.sidebarBanner
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="rules-section">
-                <h3>Rules</h3>
-                <ul>
-                  <li>Read the official Getting Started page on the docs</li>
-                  <li>Read the official Getting Started page on the docs</li>
-                  <li>Read the official Getting Started page on the docs</li>
-                  <li>Read the official Getting Started page on the docs</li>
-                  <li>Read the official Getting Started page on the docs</li>
-                  <li>Read the official Getting Started page on the docs</li>
-                  <li>Read the official Getting Started page on the docs</li>
-                </ul>
-              </div>
-              <div className="html-section">Arbritrary html will go here..</div>
+              ) : (
+                ''
+              )}
+              {this.state.codes ? (
+                <div className="rules-section">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.rulesCode
+                    }}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
+              {this.state.codes ? (
+                <div className="html-section">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.extraCode
+                    }}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
             </aside>
           </div>
           <footer className="center" id="footer">
-            <div className="banner footer-banner padding">
-              <img src="https://via.placeholder.com/728x90" alt="" />
-            </div>
+            {this.state.codes ? (
+              <div className="banner footer-banner padding">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: this.state.codes.footerBanner
+                  }}
+                />
+              </div>
+            ) : (
+              ''
+            )}
             <div className="copyright" />
           </footer>
         </Layout>
