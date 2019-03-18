@@ -3,6 +3,7 @@ import Homepage from './Homepage';
 import Submit from './Submit';
 import Single from './Single';
 import Register from './Register';
+import Admin from './Admin';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import UserPage from './UserPage';
 
@@ -20,7 +21,8 @@ export default class App extends Component {
     loginError: false,
     loginMsg: 'Something went wrong',
     currentPage: 1,
-    loadMore: true
+    loadMore: true,
+    codes: null
   };
 
   getNextPosts = () => {
@@ -177,6 +179,16 @@ export default class App extends Component {
         console.log(err);
         this.setState({ loading: false });
       });
+
+    fetch('/api/app/content')
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success) {
+          this.setState({ codes: json.codes });
+        }
+        // See if you can do anything with errors
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -192,6 +204,14 @@ export default class App extends Component {
               <div className="tab-menu" />
 
               <div className="user-header">
+                {this.state.loggedIn && this.state.user.isAdmin ? (
+                  <span>
+                    {' '}
+                    <Link to="/admin">Admin Settings</Link> |{' '}
+                  </span>
+                ) : (
+                  ''
+                )}
                 {this.state.loggedIn ? (
                   <span>
                     Hello{' '}
@@ -207,8 +227,8 @@ export default class App extends Component {
                   </span>
                 ) : (
                   <span>
-                    Want to join? <a href="#login">Log in</a> or{' '}
-                    <Link to="/register">sign up</Link> in seconds.
+                    Want to join? <Link to="/register">sign up</Link> in
+                    seconds.
                   </span>
                 )}
               </div>
@@ -216,6 +236,17 @@ export default class App extends Component {
           </header>
           <div id="container">
             <main id="body-submissions">
+              {this.state.codes ? (
+                <div className="banner top-banner padding">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.codes.topBanner
+                    }}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
               <Route
                 exact
                 path="/"
@@ -251,6 +282,20 @@ export default class App extends Component {
                 }
               />
               <Route
+                path="/admin"
+                render={(props) =>
+                  this.state.loggedIn && this.state.user.isAdmin ? (
+                    <Admin
+                      {...props}
+                      token={this.state.token}
+                      codes={this.state.codes}
+                    />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
                 exact
                 path="/user/:username"
                 render={(props) => (
@@ -271,6 +316,7 @@ export default class App extends Component {
                   <Single
                     user={this.state.user}
                     token={this.state.token}
+                    banner={this.state.codes.commentBanner}
                     updateUser={this.updateUser}
                     deletePost={this.deletePost}
                     posts={this.state.posts}
@@ -346,9 +392,55 @@ export default class App extends Component {
               ) : (
                 ''
               )}
+              {this.state.codes ? (
+                <div className="sidebar-ad">
+                  <div className="banner sidebar-banner">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: this.state.codes.sidebarBanner
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                ''
+              )}
+              {this.state.codes ? (
+                <div className="rules-section">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.codes.rulesCode
+                    }}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
+              {this.state.codes ? (
+                <div className="html-section">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: this.state.codes.extraCode
+                    }}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
             </aside>
           </div>
           <footer className="center" id="footer">
+            {this.state.codes ? (
+              <div className="banner footer-banner padding">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: this.state.codes.footerBanner
+                  }}
+                />
+              </div>
+            ) : (
+              ''
+            )}
             <div className="copyright" />
           </footer>
         </Layout>

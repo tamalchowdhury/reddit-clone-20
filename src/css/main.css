@@ -5,7 +5,7 @@
 }
 
 html {
-  word-break: break-all;
+  word-break: break-word;
 }
 
 body {
@@ -500,6 +500,31 @@ TODO Fix the top menu alignments etc
   -o-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Ad and hooks  */
+.banner {
+}
+
+.padding {
+  padding: 10px;
+}
+
+.top-banner {
+  /* text-align: center; */
+}
+
+.banner img {
+  max-width: 100%;
+}
+
+.banner-form {
+  width: 500px;
+  max-width: 100%;
+}
+
+.sidebar-ad {
+  margin-top: 10px;
 }
 
 @media only screen and (max-width: 800px) {

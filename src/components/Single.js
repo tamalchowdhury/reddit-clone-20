@@ -135,6 +135,14 @@ export default class Single extends Component {
           rank={1}
           single={true}
         />
+        {this.props.banner ? (
+          <div className="banner comment-banner padding">
+            <div dangerouslySetInnerHTML={{ __html: this.props.banner }} />
+          </div>
+        ) : (
+          ''
+        )}
+
         <div className="comments">
           {this.state.comments.length && this.state.comments.length > 1 ? (
             <h3>all {this.state.comments.length} comments</h3>
