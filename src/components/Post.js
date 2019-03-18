@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Markdown from 'react-markdown';
 
 export default class Post extends Component {
   upvote = () => {
@@ -168,7 +169,9 @@ export default class Post extends Component {
           </div>
         </div>
         {this.props.single && text ? (
-          <div className="post-text">{text}</div>
+          <div className="post-text">
+            <Markdown linkTarget="_blank" source={text} />
+          </div>
         ) : (
           ''
         )}
