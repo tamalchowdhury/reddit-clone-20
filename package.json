@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dangerously-set-inner-html": "^2.0.1",
     "gh-pages": "^2.0.1",
     "moment": "^2.24.0",
     "react": "^16.8.1",
+    "react-adsense": "^0.0.6",
+    "react-dangerous-html": "^1.0.0",
     "react-dom": "^16.8.1",
     "react-markdown": "^4.0.6",
     "react-router": "^4.3.1",
