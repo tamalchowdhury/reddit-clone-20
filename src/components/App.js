@@ -6,6 +6,7 @@ import Register from './Register';
 import Admin from './Admin';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import UserPage from './UserPage';
+import InnerHTML from 'react-dangerous-html';
 
 function Layout(props) {
   return <div id="layout">{props.children}</div>;
@@ -238,11 +239,7 @@ export default class App extends Component {
             <main id="body-submissions">
               {this.state.codes ? (
                 <div className="banner top-banner padding">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: this.state.codes.topBanner
-                    }}
-                  />
+                  <InnerHTML html={this.state.codes.topBanner} />
                 </div>
               ) : (
                 ''
@@ -397,11 +394,7 @@ export default class App extends Component {
               {this.state.codes ? (
                 <div className="sidebar-ad">
                   <div className="banner sidebar-banner">
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: this.state.codes.sidebarBanner
-                      }}
-                    />
+                    <InnerHTML html={this.state.codes.sidebarBanner} />
                   </div>
                 </div>
               ) : (
@@ -409,22 +402,14 @@ export default class App extends Component {
               )}
               {this.state.codes ? (
                 <div className="rules-section">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: this.state.codes.rulesCode
-                    }}
-                  />
+                  <InnerHTML html={this.state.codes.rulesCode} />
                 </div>
               ) : (
                 ''
               )}
               {this.state.codes ? (
                 <div className="html-section">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: this.state.codes.extraCode
-                    }}
-                  />
+                  <InnerHTML html={this.state.codes.extraCode} />
                 </div>
               ) : (
                 ''
@@ -434,11 +419,7 @@ export default class App extends Component {
           <footer className="center" id="footer">
             {this.state.codes ? (
               <div className="banner footer-banner padding">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: this.state.codes.footerBanner
-                  }}
-                />
+                <InnerHTML html={this.state.codes.footerBanner} />
               </div>
             ) : (
               ''
