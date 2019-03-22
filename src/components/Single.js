@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Post from './Post';
 import Comment from './Comment';
 import Loading from '../img/loading.gif';
+import InnerHTML from 'react-dangerous-html';
 
 export default class Single extends Component {
   state = {
@@ -137,7 +138,7 @@ export default class Single extends Component {
         />
         {this.props.banner ? (
           <div className="banner comment-banner padding">
-            <div dangerouslySetInnerHTML={{ __html: this.props.banner }} />
+            <InnerHTML html={this.props.banner} />
           </div>
         ) : (
           ''
