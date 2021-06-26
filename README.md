@@ -8,6 +8,8 @@ Reddit Clone MVC app made with React.js, Node.js, Express.js & MongoDB
 
 [Backend code](https://github.com/tamalweb/reddit-clone-20-backend)
 
+![Reddit Clone](https://raw.githubusercontent.com/tamalweb/reddit-clone-20/master/screenshot.png)
+
 ## To run the project
 
 Download the fronend source code:
