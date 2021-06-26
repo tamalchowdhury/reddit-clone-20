@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import Homepage from './Homepage';
-import Submit from './Submit';
-import Single from './Single';
-import Register from './Register';
-import Admin from './Admin';
-import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
-import UserPage from './UserPage';
-import InnerHTML from 'react-dangerous-html';
+import React, { Component } from "react";
+import Homepage from "./Homepage";
+import Submit from "./Submit";
+import Single from "./Single";
+import Register from "./Register";
+import Admin from "./Admin";
+import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
+import UserPage from "./UserPage";
+import InnerHTML from "react-dangerous-html";
 
 function Layout(props) {
   return <div id="layout">{props.children}</div>;
@@ -17,13 +17,13 @@ export default class App extends Component {
     loading: true,
     posts: [],
     user: {},
-    token: '',
+    token: "",
     loggedIn: false,
     loginError: false,
-    loginMsg: 'Something went wrong',
+    loginMsg: "Something went wrong",
     currentPage: 1,
     loadMore: true,
-    codes: null
+    codes: null,
   };
 
   getNextPosts = () => {
@@ -38,7 +38,7 @@ export default class App extends Component {
           this.setState({ posts, currentPage: this.state.currentPage + 1 });
           console.log(res);
         } else {
-          console.log('End of the posts');
+          console.log("End of the posts");
           this.setState({ loadMore: false });
         }
       })
@@ -49,14 +49,14 @@ export default class App extends Component {
     this.setState({
       loggedIn: true,
       user: res.user,
-      token: res.token
+      token: res.token,
     });
     let userInfo = {
       loggedIn: true,
       user: res.user,
-      token: res.token
+      token: res.token,
     };
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
   };
 
   tokenExpired = () => {
@@ -69,12 +69,12 @@ export default class App extends Component {
     user.username = event.target.username.value;
     user.password = event.target.password.value;
     if (user.username && user.password) {
-      fetch('/api/login', {
-        method: 'POST',
+      fetch("/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(user),
       })
         .then((res) => res.json())
         .then((res) => {
@@ -83,18 +83,18 @@ export default class App extends Component {
             this.setState({
               loggedIn: true,
               user: res.user,
-              token: res.token
+              token: res.token,
             });
             let userInfo = {
               loggedIn: true,
               user: res.user,
-              token: res.token
+              token: res.token,
             };
-            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+            localStorage.setItem("userInfo", JSON.stringify(userInfo));
           } else {
             this.setState({
               loginError: true,
-              loginMsg: res.message
+              loginMsg: res.message,
             });
           }
         })
@@ -103,13 +103,13 @@ export default class App extends Component {
           console.log(err);
           this.setState({
             loginError: true,
-            loginMsg: err
+            loginMsg: err,
           });
         });
     } else {
       this.setState({
         loginError: true,
-        loginMsg: 'Missing credentials'
+        loginMsg: "Missing credentials",
       });
     }
   };
@@ -118,16 +118,16 @@ export default class App extends Component {
     this.setState({
       loggedIn: false,
       token: undefined,
-      user: {}
+      user: {},
     });
-    localStorage.removeItem('userInfo');
+    localStorage.removeItem("userInfo");
   };
 
   submitPost = (res) => {
     let posts = [...this.state.posts];
     posts.push(res.post);
     this.setState({ posts, user: res.user });
-    localStorage.setItem('posts', JSON.stringify(posts));
+    localStorage.setItem("posts", JSON.stringify(posts));
   };
 
   // Update user after up/downvote
@@ -153,17 +153,17 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    let userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
     if (userInfo) {
       this.setState({
         loggedIn: true,
         token: userInfo.token,
-        user: userInfo.user
+        user: userInfo.user,
       });
     }
 
-    fetch('/api/posts/all')
+    fetch("/api/posts/all")
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
@@ -172,7 +172,7 @@ export default class App extends Component {
             this.setState({ loadMore: false });
           }
         } else {
-          console.log('Cannot load the file');
+          console.log("Cannot load the file");
           this.setState({ loading: false });
         }
       })
@@ -181,7 +181,7 @@ export default class App extends Component {
         this.setState({ loading: false });
       });
 
-    fetch('/api/app/content')
+    fetch("/api/app/content")
       .then((res) => res.json())
       .then((json) => {
         if (json.success) {
@@ -207,24 +207,25 @@ export default class App extends Component {
               <div className="user-header">
                 {this.state.loggedIn && this.state.user.isAdmin ? (
                   <span>
-                    {' '}
-                    <Link to="/admin">Admin Settings</Link> |{' '}
+                    {" "}
+                    <Link to="/admin">Admin Settings</Link> |{" "}
                   </span>
                 ) : (
-                  ''
+                  ""
                 )}
                 {this.state.loggedIn ? (
                   <span>
-                    Hello{' '}
+                    Hello{" "}
                     <Link
                       className="fake-link"
-                      to={`/user/${this.state.user.username}`}>
+                      to={`/user/${this.state.user.username}`}
+                    >
                       {this.state.user.username}
-                    </Link>{' '}
-                    |{' '}
+                    </Link>{" "}
+                    |{" "}
                     <a className="fake-link" onClick={this.logout}>
                       logout
-                    </a>{' '}
+                    </a>{" "}
                   </span>
                 ) : (
                   <span>
@@ -242,7 +243,7 @@ export default class App extends Component {
                   <InnerHTML html={this.state.codes.topBanner} />
                 </div>
               ) : (
-                ''
+                ""
               )}
               <Route
                 exact
@@ -343,7 +344,7 @@ export default class App extends Component {
               */}
 
               {this.state.loggedIn ? (
-                ''
+                ""
               ) : (
                 <div className="login-box" id="login">
                   {this.state.loginError ? (
@@ -353,12 +354,13 @@ export default class App extends Component {
                         className="close-button"
                         onClick={() => {
                           this.setState({ loginError: false });
-                        }}>
+                        }}
+                      >
                         &times;
                       </div>
                     </div>
                   ) : (
-                    ''
+                    ""
                   )}
                   <form onSubmit={this.login}>
                     <input
@@ -389,7 +391,7 @@ export default class App extends Component {
                   <Link to="/submit">Submit</Link>
                 </div>
               ) : (
-                ''
+                ""
               )}
               {this.state.codes ? (
                 <div className="sidebar-ad">
@@ -398,22 +400,33 @@ export default class App extends Component {
                   </div>
                 </div>
               ) : (
-                ''
+                ""
               )}
               {this.state.codes ? (
                 <div className="rules-section">
                   <InnerHTML html={this.state.codes.rulesCode} />
                 </div>
               ) : (
-                ''
+                ""
               )}
               {this.state.codes ? (
                 <div className="html-section">
                   <InnerHTML html={this.state.codes.extraCode} />
                 </div>
               ) : (
-                ''
+                ""
               )}
+              <p>
+                User: demo
+                <br />
+                Pass: 1234
+              </p>
+              <p>
+                Developed by{" "}
+                <a href="https://github.com/tamalweb" target="_blank">
+                  Tamal Anwar Chowdhury
+                </a>
+              </p>
             </aside>
           </div>
           <footer className="center" id="footer">
@@ -422,7 +435,7 @@ export default class App extends Component {
                 <InnerHTML html={this.state.codes.footerBanner} />
               </div>
             ) : (
-              ''
+              ""
             )}
             <div className="copyright" />
           </footer>

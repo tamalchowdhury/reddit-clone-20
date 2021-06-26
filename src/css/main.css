@@ -1,4 +1,4 @@
-@import './_normalize.css';
+@import "./_normalize.css";
 
 * {
   box-sizing: border-box;
@@ -26,7 +26,7 @@ body {
 }
 
 #header {
-  background: #5d198e;
+  background: #cee3f8;
   border-bottom: 1px solid #c9b2d9;
 }
 
@@ -58,7 +58,7 @@ TODO Fix the top menu alignments etc
 
 #header-img.default-header {
   text-indent: -9999px;
-  background-image: url('../img/sportsnerd-logo.png');
+  background-image: url("../img/logo.png");
   /* background-position: 0px -1323px; */
   background-repeat: no-repeat;
   background-size: contain;
@@ -85,7 +85,7 @@ TODO Fix the top menu alignments etc
   position: absolute;
   right: 0px;
   bottom: 0px;
-  background-color: #ede5f2;
+  background-color: #eff7ff;
   padding: 4px;
   line-height: 12px;
   border-top-left-radius: 7px;
@@ -211,24 +211,24 @@ TODO Fix the top menu alignments etc
 }
 
 .arrow.up {
-  background-image: url('../img/sprite.png');
+  background-image: url("../img/sprite.png");
   background-position: 0px -1676px;
   background-repeat: no-repeat;
 }
 
 .arrow.down {
-  background-image: url('../img/sprite.png');
+  background-image: url("../img/sprite.png");
   background-position: -86px -1654px;
   background-repeat: no-repeat;
 }
 
 .arrow.upvoted {
-  background-image: url('../img/sprite.png');
+  background-image: url("../img/sprite.png");
   background-position: -21px -1676px;
   background-repeat: no-repeat;
 }
 .arrow.downvoted {
-  background-image: url('../img/sprite.png');
+  background-image: url("../img/sprite.png");
   background-position: -107px -1654px;
   background-repeat: no-repeat;
 }
@@ -252,7 +252,7 @@ TODO Fix the top menu alignments etc
 }
 
 .thumbnail.self {
-  background-image: url('../img/sprite.png');
+  background-image: url("../img/sprite.png");
   background-position: 0px -1267px;
   background-repeat: no-repeat;
   height: 50px;
@@ -429,7 +429,7 @@ TODO Fix the top menu alignments etc
   position: relative;
   border: 1px solid #c4dbf1;
   background: #ffffff none repeat-x scroll center left;
-  background-image: url('../img/sprite.png');
+  background-image: url("../img/sprite.png");
   background-position: 0px -278px;
   background-repeat: repeat;
   font-size: 150%;
