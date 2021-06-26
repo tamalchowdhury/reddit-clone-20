@@ -2,11 +2,11 @@
 
 Reddit Clone MVC app made with React.js, Node.js, Express.js & MongoDB
 
-![Live Demo](https://reddit-clone-20.herokuapp.com/)
+[Live Demo](https://reddit-clone-20.herokuapp.com/)
 
-![Video Demo](https://www.youtube.com/watch?v=isD8eEcNyv0) (in case the live site is broken)
+[Video Demo](https://www.youtube.com/watch?v=isD8eEcNyv0) (in case the live site is broken)
 
-![Backend code](https://github.com/tamalweb/reddit-clone-20-backend)
+[Backend code](https://github.com/tamalweb/reddit-clone-20-backend)
 
 ## To run the project
 
@@ -32,5 +32,4 @@ Run the frontend:
 
 The app will start on `localhost:3000` and the backend server will run on `localhost:8080`
 
-See the ![backend code](https://github.com/tamalweb/reddit-clone-20-backend) for specific instructions on running the backend server.
-
+See the [backend code](https://github.com/tamalweb/reddit-clone-20-backend) for specific instructions on running the backend server.
