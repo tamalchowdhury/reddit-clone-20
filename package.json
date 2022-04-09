@@ -5,7 +5,7 @@
   "dependencies": {
     "dangerously-set-inner-html": "^2.0.1",
     "gh-pages": "^2.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.8.1",
     "react-adsense": "^0.0.6",
     "react-dangerous-html": "^1.0.0",
